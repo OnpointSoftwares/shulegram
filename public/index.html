@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShuleGram - See, Celebrate, and Boost Your Child's Learning</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="https://res.cloudinary.com/dtpevimcr/image/upload/v1762934774/Shulegram_logo_uwcvpn.png"/>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="/src/css/styles.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #7C3AED;
+            --primary-light: #E9D5FF;
+            --primary-dark: #5B21B6;
+            --accent: #FF6B9D;
+            --accent-light: #FFE4EC;
+            --dark: #1E1B4B;
+            --darker: #0F172A;
+            --light: #F9FAFB;
+            --gray: #4B5563;
+            --light-gray: #E5E7EB;
+            --white: #FFFFFF;
+            --text-primary: #1F2937;
+            --text-secondary: #4B5563;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            background-color: var(--white);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: var(--darker);
+        }
+        
+        .btn-light {
+            background-color: white;
+            color: var(--primary) !important;
+            border: none;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            font-size: 0.85rem;
+            padding: 0.5rem 0.6rem;
+            white-space: nowrap;
+            color: #2d3748;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-nav {
+            flex-wrap: nowrap;
+        }
+        
+        .btn-light:hover {
+            background-color: var(--light) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .btn-outline-light {
+            border-color: white;
+            color: white;
+            background-color: transparent;
+        }
+        
+        .btn-outline-light:hover {
+            background-color: white;
+            color: var(--primary) !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            padding: 0.6rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-accent:hover {
+            background-color: #E11D8C;
+            border-color: #E11D8C;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .navbar {
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 0.5rem 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--darker) !important;
+        }
+        
+        .navbar-brand img {
+            transition: transform 0.3s ease;
+        }
+        
+        .navbar-brand:hover img {
+            transform: rotate(10deg);
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: var(--darker) !important;
+            margin: 0 0.5rem;
+            position: relative;
+            padding: 0.5rem 0.75rem !important;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--primary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 70%;
+        }
+        
+        .btn-get-started {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: white;
+            font-weight: 500;
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-get-started:hover {
+            background-color: #E11D8C;
+            border-color: #E11D8C;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .text-muted {
+            color: var(--text-secondary) !important;
+        }
+        
+        .card {
+            border: 1px solid var(--light-gray);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            border-radius: 16px;
+            overflow: hidden;
+            height: 100%;
+            background: white;
+        }
+        
+        .card:hover {
+            border-color: var(--primary-light);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.1) !important;
+        }
+        
+        .card-body {
+            padding: 2rem;
+        }
+        
+        .card-title {
+            color: var(--darker);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+        
+        .card-text {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+        }
+        
+        .feature-card h4 {
+            color: var(--darker);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card a {
+            margin-top: auto;
+            color: var(--primary) !important;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-icon {
+            background-color: var(--primary-light);
+            width: 64px !important;
+            height: 64px !important;
+            border-radius: 50% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            margin-bottom: 1.5rem !important;
+            color: var(--primary) !important;
+            transition: all 0.3s ease !important;
+            flex-shrink: 0 !important;
+            padding: 0 !important;
+            aspect-ratio: 1/1 !important;
+        }
+        
+        .feature-icon i {
+            font-size: 1.75rem !important;
+            line-height: 1 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 1em !important;
+            height: 1em !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        
+        .feature-icon i.bi {
+            font-size: 1.75rem;
+        }
+        
+        .feature-card a:hover {
+            color: var(--primary-dark) !important;
+            transform: translateX(5px);
+        }
+        
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #6D28D9 0%, #8B5CF6 50%, #EC4899 100%);
+            position: relative;
+            overflow: hidden;
+            color: white;
+            padding: 6rem 0;
+        }
+        
+        .hero-section h1 {
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 3.25rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-section p {
+            color: rgba(255,255,255,0.95);
+            font-size: 1.25rem;
+            max-width: 600px;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+        
+        /* Wave shapes */
+        .wave-shape {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+        
+        .wave-shape-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+        
+        .wave-shape-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+        
+        .wave-shape-below-nav {
+            position: absolute;
+            top: 56px; /* Height of navbar */
+            left: 0;
+            width: 100%;
+            z-index: 1029;
+            pointer-events: none;
+        }
+        
+        .wave-shape-above-footer {
+            position: relative;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            margin-bottom: -1px;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <img src="https://res.cloudinary.com/dtpevimcr/image/upload/v1762934774/Shulegram_logo_uwcvpn.png" 
+                     width="32" 
+                     height="32" 
+                     class="me-2" 
+                     alt="ShuleGram Logo">
+                ShuleGram
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#for-parents">For Parent/Guardian</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#for-teachers">For Teachers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#for-learners">For Learners</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#study-booster">Study Booster</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pre-career-support">Pre-career Support</a>
+                    </li>
+                    <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                        <a href="#download" class="btn btn-get-started">Get Started</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section position-relative" id="home" style="min-height: 100vh; display: flex; align-items: center; background: linear-gradient(135deg, rgba(109, 40, 217, 0.95) 0%, rgba(139, 92, 246, 0.9) 50%, rgba(236, 72, 153, 0.85) 100%), url('https://images.unsplash.com/photo-1503676260728-1c00da094a05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80') center/cover no-repeat; overflow: hidden;">
+        <!-- Dark Overlay -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.3);"></div>
+        <!-- Pattern Overlay -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.15; background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48cGF0dGVybiBpZD0icGF0dGVybiIgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBwYXR0ZXJuVHJhbnNmb3JtPSJyb3RhdGUoNDUpIj48cmVjdCB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuMDgiLz48L3BhdHRlcm4+PC9zdmc+');"></div>
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 text-white pt-5 pt-lg-0" data-aos="fade-right">
+                    <h1 class="display-4 fw-bold mb-4">See, Celebrate, and <span class="highlight-text">Boost</span> Your Child's Learning</h1>
+                    <p class="lead mb-5">Stop wondering what your child did at school today. Connect with teachers, celebrate achievements, and access quality tutors—all in one safe app.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#" class="btn btn-light btn-lg px-4 py-3 fw-bold" style="background: white; color: var(--primary);" onclick="event.preventDefault(); alert('Coming Soon!');">
+                            <i class="bi bi-download me-2"></i> Download App
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-lg px-4 py-3 fw-bold" onclick="event.preventDefault(); alert('Coming Soon!');">
+                            <i class="bi bi-play-circle me-2"></i> Watch Demo
+                        </a>
+                    </div>
+                    <div class="mt-5 d-flex align-items-center">
+                        <div class="d-flex me-3">
+                   
+                        </div>
+                        <div>
+                            <div class="d-flex align-items-center">
+                                <div class="text-warning me-2">
+                                
+                                </div>
+                                <span class="fw-bold"></span>
+                            </div>
+                            <p class="mb-0 small opacity-75"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="position-relative">
+                        <img src="https://res.cloudinary.com/dtpevimcr/image/upload/w_800,c_scale/v1762934774/Shulegram_mockup_1.png" 
+                             alt="ShuleGram App" 
+                             class="img-fluid rounded-4 shadow-lg"
+                             style="animation: float 6s ease-in-out infinite;">
+                        <div class="position-absolute top-0 start-0 translate-middle d-none d-lg-block">
+                            <div class="bg-white p-3 rounded-circle shadow" style="animation: float 4s ease-in-out infinite 1s;">
+                                <i class="bi bi-chat-dots-fill text-primary fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="position-absolute bottom-0 end-0 translate-middle d-none d-lg-block">
+                            <div class="bg-white p-3 rounded-circle shadow" style="animation: float 5s ease-in-out infinite 0.5s;">
+                                <i class="bi bi-heart-fill text-danger fs-4"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wave-shape">
+            <svg viewBox="0 0 1440 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 100C0 100 300 0 720 100C1140 200 1440 100 1440 100V200H0V100Z" fill="white"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5 py-lg-7 bg-white" id="features">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="display-5 fw-bold mb-3">Why You'll Love ShuleGram</h2>
+                <p class="lead text-muted">A complete social-educational ecosystem for the holistic success of learners</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 p-4">
+                        <div class="feature-icon">
+                            <i class="bi bi-chat-square-text"></i>
+                        </div>
+                        <h4 class="mb-3">Real-time Updates</h4>
+                        <p class="text-muted">Stay connected with your child's school life through instant notifications, photos, and announcements from teachers.</p>
+                        <a href="#" class="text-primary text-decoration-none fw-medium mt-auto">Learn more <i class="bi bi-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 p-4">
+                        <div class="feature-icon">
+                            <i class="bi bi-mortarboard"></i>
+                        </div>
+                        <h4 class="mb-3">Study Booster</h4>
+                        <p class="text-muted">Access a curated selection of tutors and learning resources to support your child's academic journey.</p>
+                        <a href="#" class="text-primary text-decoration-none fw-medium mt-auto">Explore tutors <i class="bi bi-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 p-4">
+                        <div class="feature-icon">
+                            <i class="bi bi-shield-lock"></i>
+                        </div>
+                        <h4 class="mb-3">Secure & Private</h4>
+                        <p class="text-muted">Your child's data is protected with enterprise-grade security and privacy controls.</p>
+                        <a href="#" class="text-primary text-decoration-none fw-medium mt-auto">Our security <i class="bi bi-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Parent/Guardian Section -->
+    <section class="py-5 py-lg-7 bg-light" id="for-parents">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
+                    <h2 class="display-5 fw-bold mb-4">For Parent/Guardian</h2>
+                    <p class="lead text-muted mb-5">Stay connected and support your child's educational journey like never before.</p>
+                    
+                    <div class="d-flex mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="me-4">
+                            <div class="bg-primary text-white rounded-3 p-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                <i class="bi bi-camera-reels fs-4"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Your Child's Highlights Reel</h5>
+                            <p class="text-muted mb-0">Receive photos and videos of your 
+                                child's school day, sent directly to only you and avoid 
+                                spam bulking your phone with
+                                 irrelevant photos, videos and messages. See them learn,
+                                  play, and grow in real time.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex mb-4" data-aos="fade-up" data-aos-delay="150">
+                        <div class="me-4">
+                            <div class="bg-primary text-white rounded-3 p-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                <i class="bi bi-bell fs-4"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Never Miss a Moment</h5>
+                            <p class="text-muted mb-0">Get instant notifications about school events, assignments, and important updates.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
+                        <div class="me-4">
+                            <div class="bg-primary text-white rounded-3 p-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                <i class="bi bi-shield-check fs-4"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Total Peace of Mind</h5>
+                            <p class="text-muted mb-0">Know your child is in good hands with our secure platform and verified educators.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="position-relative">
+                        <img src="https://res.cloudinary.com/dtpevimcr/image/upload/v1763017103/pexels-prince-beguin-81839921-31773583_thmjv5.jpg" 
+                             alt="Parent and child using ShuleGram" 
+                             class="img-fluid rounded-4 shadow-lg">
+                        <div class="position-absolute top-0 start-0 translate-middle d-none d-lg-block">
+                            <div class="bg-white p-3 rounded-circle shadow">
+                                <i class="bi bi-heart-fill text-danger"></i>
+                            </div>
+                        </div>
+                        <div class="position-absolute bottom-0 end-0 translate-middle d-none d-lg-block">
+                            <div class="bg-white p-3 rounded-circle shadow">
+                                <i class="bi bi-chat-dots-fill text-primary"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Teachers Section -->
+    <section class="py-5 py-lg-7" id="for-teachers">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-2 mb-5 mb-lg-0" data-aos="fade-left">
+                    <h2 class="display-5 fw-bold mb-4">For Teachers</h2>
+                    <p class="lead text-muted mb-5">Empower your teaching and connect with students and parents effortlessly.</p>
+                    
+                    <div class="d-flex mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="me-4">
+                            <div class="bg-primary text-white rounded-3 p-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                <i class="bi bi-share fs-4"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Share Wins Instantly</h5>
+                            <p class="text-muted mb-0">Celebrate student achievements and share classroom moments with parents in real-time.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex mb-4" data-aos="fade-up" data-aos-delay="150">
+                        <div class="me-4">
+                            <div class="bg-primary text-white rounded-3 p-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                <i class="bi bi-cash-coin fs-4"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Your New Side Hustle, Simplified</h5>
+                            <p class="text-muted mb-0">Earn extra income by offering tutoring through our Study Booster program.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
+                        <div class="me-4">
+                            <div class="bg-primary text-white rounded-3 p-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                <i class="bi bi-people fs-4"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Build Stronger Connections</h5>
+                            <p class="text-muted mb-0">Foster better relationships with students and parents through seamless communication.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 order-lg-1" data-aos="fade-right">
+                    <div class="position-relative">
+                        <img src="https://res.cloudinary.com/dtpevimcr/image/upload/v1763017212/pexels-chris-del-santo-200613702-11568056_yv80lt.jpg" 
+                             alt="Teacher using ShuleGram" 
+                             class="img-fluid rounded-4 shadow-lg">
+                        <div class="position-absolute top-0 start-0 translate-middle d-none d-lg-block">
+                            <div class="bg-white p-3 rounded-circle shadow">
+                                <i class="bi bi-star-fill text-warning"></i>
+                            </div>
+                        </div>
+                        <div class="position-absolute bottom-0 end-0 translate-middle d-none d-lg-block">
+                            <div class="bg-white p-3 rounded-circle shadow">
+                                <i class="bi bi-bookmark-check-fill text-success"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Study Booster Section -->
+    <section class="py-5 py-lg-7 bg-gradient-to-r from-primary to-accent text-white position-relative" id="study-booster">
+        <!-- Cloud effect top -->
+        <div class="wave-shape-top">
+            <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 100C0 100 300 0 720 50C1140 100 1440 0 1440 0H0V100Z" fill="white"/>
+            </svg>
+        </div>
+        
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0 bg-primary p-4" data-aos="fade-right">
+                    <span class="badge bg-white text-primary rounded-pill px-3 py-2 mb-3 d-inline-block">New Feature</span>
+                    <h2 class="display-5 fw-bold mb-4">Empowering African Learners</h2>
+                    <p class="lead mb-5">Personalized learning support with qualified African educators to help your child excel in their studies.</p>
+                    
+                    <div class="row g-4 mb-5">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start">
+                                <div class="bg-white text-primary rounded-circle p-2 me-3 flex-shrink-0" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="bi bi-mortarboard"></i>
+                                </div>
+                                <div>
+                                    <h5 class="h6 fw-bold mb-1">African Educators</h5>
+                                    <p class="small mb-0 opacity-75">Qualified teachers who understand our context</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start">
+                                <div class="bg-white text-primary rounded-circle p-2 me-3 flex-shrink-0" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="bi bi-people"></i>
+                                </div>
+                                <div>
+                                    <h5 class="h6 fw-bold mb-1">Personalized Learning</h5>
+                                    <p class="small mb-0 opacity-75">Tailored to each child's needs</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start">
+                                <div class="bg-white text-primary rounded-circle p-2 me-3 flex-shrink-0" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="bi bi-book"></i>
+                                </div>
+                                <div>
+                                    <h5 class="h6 fw-bold mb-1">Local Curriculum</h5>
+                                    <p class="small mb-0 opacity-75">Aligned with African educational standards</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start">
+                                <div class="bg-white text-primary rounded-circle p-2 me-3 flex-shrink-0" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="bi bi-clock"></i>
+                                </div>
+                                <div>
+                                    <h5 class="h6 fw-bold mb-1">Flexible Scheduling</h5>
+                                    <p class="small mb-0 opacity-75">Learn at your convenience</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#" class="btn btn-light btn-lg px-4">Find a Tutor</a>
+                        <a href="#" class="btn btn-outline-light btn-lg px-4">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="position-relative">
+                        <img src="https://res.cloudinary.com/dtpevimcr/image/upload/v1763017406/pexels-bornostoryteller-19800837_b3dske.jpg" 
+                             alt="African teacher with students" 
+                             class="img-fluid rounded-4 shadow-lg mb-4"
+                             style="border: 8px solid rgba(255,255,255,0.2);">
+                        <img src="https://res.cloudinary.com/dtpevimcr/image/upload/v1763017400/pexels-b-aristotle-guweh-jr-1643208950-28638752_lg1s7z.jpg" 
+                             alt="African children learning" 
+                             class="img-fluid rounded-4 shadow-lg d-none d-md-block position-absolute"
+                             style="width: 60%; right: 0; bottom: -40px; border: 8px solid rgba(255,255,255,0.2); z-index: 1;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Cloud effect bottom -->
+        <div class="wave-shape-bottom">
+            <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0C0 0 300 100 720 50C1140 0 1440 100 1440 100H0V0Z" fill="white"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-5 py-lg-7 bg-white" id="how-it-works">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="display-5 fw-bold mb-3">How It Works</h2>
+                <p class="lead text-muted">Get started with ShuleGram in just a few simple steps</p>
+            </div>
+            
+            <div class="row g-4 position-relative">
+                <!-- Timeline line -->
+                <div class="timeline-line d-none d-lg-block"></div>
+                
+                <!-- Step 1 -->
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card border-0 bg-light h-100">
+                        <div class="card-body p-4 text-center">
+                            <div class="step-number bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4">1</div>
+                            <h4 class="h5 fw-bold mb-3">Download the App</h4>
+                            <p class="text-muted mb-0">Get ShuleGram from the App Store or Google Play Store on your device.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card border-0 bg-light h-100">
+                        <div class="card-body p-4 text-center">
+                            <div class="step-number bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4">2</div>
+                            <h4 class="h5 fw-bold mb-3">Create Your Account</h4>
+                            <p class="text-muted mb-0">Sign up and connect with your child's school using the provided code.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card border-0 bg-light h-100">
+                        <div class="card-body p-4 text-center">
+                            <div class="step-number bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4">3</div>
+                            <h4 class="h5 fw-bold mb-3">Start Connecting</h4>
+                            <p class="text-muted mb-0">Receive updates, view photos, and access Study Booster for tutoring.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section - Commented Out for Now
+    <section class="py-5 py-lg-7 bg-light" id="testimonials">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="display-5 fw-bold mb-3">What Parents & Teachers Say</h2>
+                <p class="lead text-muted">Hear from our community about their ShuleGram experience</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-4">
+                                <img src="https://randomuser.me/api/portraits/women/43.jpg" class="rounded-circle me-3" width="60" height="60" alt="Sarah M.">
+                                <div>
+                                    <h5 class="mb-1">Sarah M.</h5>
+                                    <p class="text-muted mb-0">Parent/Guardian</p>
+                                </div>
+                            </div>
+                            <div class="text-warning mb-3">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+                            <p class="mb-0">"ShuleGram has completely transformed how I stay connected with my son's education. I love seeing his daily activities and being able to support his learning journey."</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-4">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle me-3" width="60" height="60" alt="David K.">
+                                <div>
+                                    <h5 class="mb-1">David K.</h5>
+                                    <p class="text-muted mb-0">Teacher</p>
+                                </div>
+                            </div>
+                            <div class="text-warning mb-3">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+                            <p class="mb-0">"As a teacher, ShuleGram has made parent/guardian-teacher communication so much easier. I can share updates instantly and focus more on teaching."</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-4">
+                                <img src="https://randomuser.me/api/portraits/women/28.jpg" class="rounded-circle me-3" width="60" height="60" alt="Amina J.">
+                                <div>
+                                    <h5 class="mb-1">Amina J.</h5>
+                                    <p class="text-muted mb-0">Tutor</p>
+                                </div>
+                            </div>
+                            <div class="text-warning mb-3">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+                            <p class="mb-0">"Study Booster has allowed me to reach more students and make a real difference. The platform is easy to use and the support is excellent."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    -->
+
+    <!-- Pre-career Support System Section -->
+    <section class="py-5 py-lg-7 bg-white" id="pre-career-support">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-primary-soft text-primary rounded-pill px-3 py-2 mb-3 d-inline-block">New</span>
+                <h2 class="display-5 fw-bold mb-3">Pre-career Support System</h2>
+                <p class="lead text-muted">Connect with verified professionals to guide students in their career journey</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-center p-4 h-100">
+                        <div class="bg-primary-soft text-primary rounded-3 p-4 mb-4 mx-auto" style="width: 100px; height: 100px; display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-heart-pulse fs-1"></i>
+                        </div>
+                        <h4 class="h5 fw-bold mb-3">Chaplaincy</h4>
+                        <p class="text-muted mb-0">Spiritual guidance and moral support from certified chaplains to help students navigate life's challenges.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-center p-4 h-100">
+                        <div class="bg-primary-soft text-primary rounded-3 p-4 mb-4 mx-auto" style="width: 100px; height: 100px; display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-people fs-1"></i>
+                        </div>
+                        <h4 class="h5 fw-bold mb-3">Coaching</h4>
+                        <p class="text-muted mb-0">Professional coaches to help students develop essential life skills and career competencies.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-center p-4 h-100">
+                        <div class="bg-primary-soft text-primary rounded-3 p-4 mb-4 mx-auto" style="width: 100px; height: 100px; display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-chat-left-heart fs-1"></i>
+                        </div>
+                        <h4 class="h5 fw-bold mb-3">Counselling</h4>
+                        <p class="text-muted mb-0">Licensed counsellors providing academic and personal guidance for student success.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5" data-aos="fade-up" data-aos-delay="400">
+                <div class="bg-light p-4 rounded-4 d-inline-block">
+                    <h4 class="h5 fw-bold mb-3">Find Verified Pre-career Support Professionals</h4>
+                    <p class="text-muted mb-4">All our chaplains, coaches, and counsellors undergo a thorough verification process to ensure quality and reliability.</p>
+                    <a href="#" class="btn btn-primary btn-lg px-5">Find Support Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+       <!-- Cloud effect above footer -->
+       <div class="wave-shape-above-footer">
+        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0C0 0 300 60 720 60C1140 60 1440 0 1440 0V120H0V0Z" fill="#1a1a2e"/>
+        </svg>
+    </div>
+    <!-- CTA Section -->
+    <section class="py-5 py-lg-7 bg-primary text-white" id="download">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center" data-aos="zoom-in">
+                    <h2 class="display-5 fw-bold mb-4">Ready to Transform the School Experience?</h2>
+                    <p class="lead mb-5">Join thousands of parents/guardians and teachers already using ShuleGram to stay connected and support learning.</p>
+                    
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <a href="#" class="btn btn-light btn-lg px-4 py-3 fw-bold d-flex align-items-center">
+                            <i class="bi bi-apple fs-3 me-2"></i>
+                            <div class="text-start">
+                                <small class="d-block" style="font-size: 0.7rem;">Download on the</small>
+                                <span class="d-block">App Store</span>
+                            </div>
+                        </a>
+                        
+                        <a href="#" class="btn btn-outline-light btn-lg px-4 py-3 fw-bold d-flex align-items-center">
+                            <i class="bi bi-google-play fs-3 me-2"></i>
+                            <div class="text-start">
+                                <small class="d-block" style="font-size: 0.7rem;">Get it on</small>
+                                <span class="d-block">Google Play</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+ 
+    
+    <!-- Footer -->
+    <footer class="py-5 text-white" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); margin-top: -1px;">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <a class="navbar-brand d-flex align-items-center mb-4" href="/">
+                        <img src="https://res.cloudinary.com/dtpevimcr/image/upload/v1762934774/Shulegram_logo_uwcvpn.png" 
+                             width="32" 
+                             height="32" 
+                             class="me-2" 
+                             alt="ShuleGram Logo">
+                        <span class="fw-bold" style="color: white;">ShuleGram</span>
+                    </a>
+                    <p class="text-muted">See Their Day. Boost Their Future.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-white opacity-75 hover-opacity-100" style="transition: opacity 0.3s;">
+                            <i class="bi bi-facebook fs-4"></i>
+                        </a>
+                        <a href="#" class="text-white opacity-75 hover-opacity-100" style="transition: opacity 0.3s;">
+                            <i class="bi bi-twitter-x fs-4"></i>
+                        </a>
+                        <a href="#" class="text-white opacity-75 hover-opacity-100" style="transition: opacity 0.3s;">
+                            <i class="bi bi-instagram fs-4"></i>
+                        </a>
+                        <a href="#" class="text-white opacity-75 hover-opacity-100" style="transition: opacity 0.3s;">
+                            <i class="bi bi-linkedin fs-4"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-6 col-md-3 col-lg-2">
+                    <h5 class="h6 fw-bold mb-4">Product</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#features" class="text-muted text-decoration-none hover-text-white" style="transition: color 0.3s;">Features</a></li>
+                        <li class="mb-2"><a href="#for-parents" class="text-muted text-decoration-none hover-text-white" style="transition: color 0.3s;">For Parent/Guardian</a></li>
+                        <li class="mb-2"><a href="#for-teachers" class="text-muted text-decoration-none hover-text-white" style="transition: color 0.3s;">For Teachers</a></li>
+                        <li class="mb-2"><a href="#study-booster" class="text-muted text-decoration-none hover-text-white" style="transition: color 0.3s;">Study Booster</a></li>
+                        <li class="mb-2"><a href="#pre-career-support" class="text-muted text-decoration-none hover-text-white" style="transition: color 0.3s;">Pre-career Support</a></li>
+                        <li><a href="#pricing" class="text-muted text-decoration-none hover-text-white" style="transition: color 0.3s;">Pricing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-6 col-md-3 col-lg-2">
+                    <h5 class="h6 fw-bold mb-4">Company</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none hover-text-white" style="transition: color 0.3s;">About Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none hover-text-white" style="transition: color 0.3s;">Careers</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none hover-text-white" style="transition: color 0.3s;">Blog</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none hover-text-white" style="transition: color 0.3s;">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-6 col-md-3 col-lg-2">
+                    <h5 class="h6 fw-bold mb-4">Support</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none hover-text-white" style="transition: color 0.3s;">Help Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none hover-text-white" style="transition: color 0.3s;">FAQs</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none hover-text-white" style="transition: color 0.3s;">Tutorials</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none hover-text-white" style="transition: color 0.3s;">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-6 col-md-3 col-lg-2">
+                    <h5 class="h6 fw-bold mb-4">Legal</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="/privacy-policy" class="text-muted text-decoration-none hover-text-white" style="transition: color 0.3s;">Privacy Policy</a></li>
+                        <li class="mb-2"><a href="/terms-and-conditions" class="text-muted text-decoration-none hover-text-white" style="transition: color 0.3s;">Terms of Service</a></li>
+                        <li class="mb-2"><a href="/child-protection-policy" class="text-muted text-decoration-none hover-text-white" style="transition: color 0.3s;">Child Protection</a></li>
+                        <li><a href="/data-protection" class="text-muted text-decoration-none hover-text-white" style="transition: color 0.3s;">Data Protection</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <p class="mb-0 text-muted">&copy; 2025 ShuleGram. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Cloud effect above footer -->
+    <div class="wave-shape-above-footer">
+        <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0C0 0 300 60 720 40C1140 20 1440 60 1440 60V0H0Z" fill="#16213e"/>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('mainNav');
+            const backToTop = document.getElementById('backToTop');
+            
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+                backToTop.style.opacity = '1';
+                backToTop.style.visibility = 'visible';
+            } else {
+                navbar.classList.remove('scrolled');
+                backToTop.style.opacity = '0';
+                backToTop.style.visibility = 'hidden';
+            }
+        });
+        
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbarToggler = document.querySelector('.navbar-toggler');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            
+            if (navbarToggler && navbarCollapse) {
+                navbarToggler.addEventListener('click', function() {
+                    navbarToggler.classList.toggle('collapsed');
+                    navbarCollapse.classList.toggle('show');
+                });
+            }
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+                        const headerOffset = 80;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                            navbarToggler.classList.add('collapsed');
+                            navbarCollapse.classList.remove('show');
+                        }
+                    }
+                });
+            });
+            
+            // Back to top button
+            const backToTop = document.getElementById('backToTop');
+            if (backToTop) {
+                backToTop.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+            
+            // Add active class to nav links on scroll
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            window.addEventListener('scroll', function() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (pageYOffset >= sectionTop - 200) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+        
+        // Animation for counter
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target.toLocaleString();
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current).toLocaleString();
+                }
+            }, 20);
+        }
+        
+        // Initialize counters when they come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    animateCounter(counter, target);
+                    observer.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        document.querySelectorAll('.counter').forEach(counter => {
+            observer.observe(counter);
+        });
+    </script>
+</body>
+</html>

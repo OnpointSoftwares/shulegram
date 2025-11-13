@@ -1,0 +1,149 @@
+/* Policy Pages Shared Styles */
+:root {
+    --primary: #7C3AED;
+    --primary-light: #E9D5FF;
+    --primary-dark: #5B21B6;
+    --accent: #EC4899;
+    --accent-light: #FCE7F3;
+    --light-gray: #F3F4F6;
+    --dark: #1F2937;
+    --white: #FFFFFF;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: var(--dark);
+    line-height: 1.7;
+    background-color: #f8fafc;
+}
+
+/* Navbar */
+.navbar {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    padding: 1rem 0;
+    transition: all 0.3s ease;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: var(--primary) !important;
+}
+
+/* Hero Section */
+.policy-hero {
+    background: linear-gradient(135deg, rgba(109, 40, 217, 0.95) 0%, rgba(139, 92, 246, 0.9) 50%, rgba(236, 72, 153, 0.85) 100%);
+    color: white;
+    padding: 6rem 0 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.policy-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://images.unsplash.com/photo-1503676260728-1c00da094a05?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
+    opacity: 0.1;
+    z-index: 1;
+}
+
+.policy-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Content Styling */
+.policy-content {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    padding: 3rem;
+    margin: -3rem auto 3rem;
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    .policy-content {
+        padding: 2rem 1.5rem;
+        margin: -2rem auto 2rem;
+    }
+}
+
+/* Section Styling */
+.section-card {
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.section-number {
+    font-size: 6rem;
+    font-weight: 800;
+    color: var(--light-gray);
+    line-height: 1;
+    position: absolute;
+    right: 0;
+    top: -1.5rem;
+    z-index: 0;
+    opacity: 0.8;
+}
+
+.section-title {
+    position: relative;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    z-index: 1;
+}
+
+/* Footer */
+.policy-footer {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: white;
+    padding: 3rem 0 2rem;
+}
+
+/* Back to top button */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--primary);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(124, 63, 237, 0.3);
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 999;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background: var(--primary-dark);
+    transform: translateY(-3px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .section-number {
+        font-size: 4rem;
+        top: -0.5rem;
+    }
+    
+    .policy-hero {
+        padding: 5rem 0 3rem;
+    }
+}

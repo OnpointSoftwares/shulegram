@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Policy Page - ShuleGram</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="https://res.cloudinary.com/dtpevimcr/image/upload/v1762934774/Shulegram_logo_uwcvpn.png"/>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #7C3AED;
+            --primary-light: #E9D5FF;
+            --primary-dark: #5B21B6;
+            --accent: #FF6B9D;
+            --accent-light: #FFE4EC;
+            --dark: #1E1B4B;
+            --darker: #0F172A;
+            --light: #F9FAFB;
+            --gray: #4B5563;
+            --light-gray: #E5E7EB;
+            --white: #FFFFFF;
+            --text-primary: #1F2937;
+            --text-secondary: #4B5563;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            background-color: var(--white);
+            padding-top: 76px; /* Height of fixed navbar */
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: var(--darker);
+        }
+        
+        /* Navbar */
+        .navbar {
+            transition: all 0.3s ease;
+            padding: 1rem 0;
+            background: rgba(255, 255, 255, 0.98) !important;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary) !important;
+            font-size: 1.5rem;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-primary) !important;
+            margin: 0 0.5rem;
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--primary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .nav-link.active {
+            color: var(--primary) !important;
+            font-weight: 600;
+        }
+        
+        .nav-link.active:after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .policy-hero {
+            background: linear-gradient(135deg, rgba(109, 40, 217, 0.95) 0%, rgba(139, 92, 246, 0.9) 50%, rgba(236, 72, 153, 0.85) 100%), 
+                          url('https://images.unsplash.com/photo-1503676260728-1c00da094a05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
+            color: white;
+            padding: 8rem 0 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .policy-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+        
+        .policy-hero .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Policy Content */
+        .policy-content {
+            padding: 5rem 0;
+        }
+        
+        .toc {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+        
+        .toc h5 {
+            color: var(--primary);
+            margin-bottom: 1.25rem;
+            font-size: 1.1rem;
+        }
+        
+        .toc-item {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            margin: 0.25rem 0;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+        
+        .toc-item:hover, .toc-item.active {
+            background: var(--primary-light);
+            color: var(--primary);
+            padding-left: 1rem;
+        }
+        
+        .policy-section {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .policy-section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.75rem;
+        }
+        
+        .policy-section h3 {
+            color: var(--darker);
+            margin: 2rem 0 1rem;
+            font-size: 1.4rem;
+        }
+        
+        .policy-section p, .policy-section ul, .policy-section ol {
+            margin-bottom: 1.25rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        .policy-section ul, .policy-section ol {
+            padding-left: 1.5rem;
+        }
+        
+        .policy-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Cloud Effects */
+        .cloud-effect {
+            position: absolute;
+            width: 100%;
+            height: 100px;
+            background-size: 100% 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .cloud-top {
+            top: 0;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDQwIDYwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIj48cGF0aCBkPSJNMCw1MC4zQzE2MCwzMC4zLDMxMCw2MCw0ODAsNTBjMTcwLTEwLDMxMC0zMCw0ODAtMzBzMzEwLDIwLDQ4MCwzMGMxNzAsMTAsMzEwLTAuMyw0ODAtMTB2NjBIMFY1MC4zeiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==') no-repeat;
+            transform: rotate(180deg);
+        }
+        
+        .cloud-bottom {
+            bottom: 0;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDQwIDYwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIj48cGF0aCBkPSJNMCw1MC4zQzE2MCwzMC4zLDMxMCw2MCw0ODAsNTBjMTcwLTEwLDMxMC0zMCw0ODAtMzBzMzEwLDIwLDQ4MCwzMGMxNzAsMTAsMzEwLTAuMyw0ODAtMTB2NjBIMFY1MC4zeiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==') no-repeat;
+        }
+        
+        /* Responsive */
+        @media (max-width: 991.98px) {
+            .policy-hero {
+                padding: 6rem 0 4rem;
+            }
+            
+            .policy-section {
+                padding: 1.5rem;
+            }
+            
+            .policy-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .policy-section h3 {
+                font-size: 1.25rem;
+            }
+        }
+        
+        @media (max-width: 767.98px) {
+            .policy-hero {
+                padding: 5rem 0 3rem;
+            }
+            
+            .policy-content {
+                padding: 3rem 0;
+            }
+            
+            .toc {
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <img src="https://res.cloudinary.com/dtpevimcr/image/upload/v1762934774/Shulegram_logo_uwcvpn.png" 
+                     width="32" 
+                     height="32" 
+                     class="me-2" 
+                     alt="ShuleGram Logo">
+                <span>ShuleGram</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-it-works">How It Works</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#download">Download</a>
+                    </li>
+                    <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                        <a href="#download" class="btn btn-primary">Get Started</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Cloud Effect -->
+    <section class="policy-hero">
+        <div class="cloud-effect cloud-top"></div>
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-10">
+                    <h1 class="display-4 fw-bold mb-3" data-aos="fade-up">Policy Title</h1>
+                    <p class="lead mb-0" data-aos="fade-up" data-aos-delay="100">Last updated: January 1, 2025</p>
+                </div>
+            </div>
+        </div>
+        <div class="cloud-effect cloud-bottom"></div>
+    </section>
+
+    <!-- Policy Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Table of Contents -->
+            <div class="col-lg-3 d-none d-lg-block">
+                <div class="toc position-sticky" style="top: 100px;">
+                    <h5><i class="bi bi-list-ul me-2"></i>Contents</h5>
+                    <a href="#introduction" class="toc-item active">1. Introduction</a>
+                    <a href="#definitions" class="toc-item">2. Definitions</a>
+                    <a href="#data-collection" class="toc-item">3. Data Collection</a>
+                    <a href="#data-usage" class="toc-item">4. How We Use Your Data</a>
+                    <a href="#data-protection" class="toc-item">5. Data Protection</a>
+                    <a href="#your-rights" class="toc-item">6. Your Rights</a>
+                    <a href="#changes" class="toc-item">7. Changes to This Policy</a>
+                    <a href="#contact" class="toc-item">8. Contact Us</a>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-lg-9">
+                <div class="policy-section" id="introduction" data-aos="fade-up">
+                    <h2>1. Introduction</h2>
+                    <p>Welcome to ShuleGram. This policy explains how we handle your information when you use our services. Please read it carefully.</p>
+                    <p>By using ShuleGram, you agree to the collection and use of information in accordance with this policy.</p>
+                </div>
+                
+                <div class="policy-section" id="definitions" data-aos="fade-up">
+                    <h2>2. Definitions</h2>
+                    <p>For the purposes of this Privacy Policy:</p>
+                    <ul>
+                        <li><strong>Personal Data</strong> means any information relating to an identified or identifiable individual.</li>
+                        <li><strong>Service</strong> refers to the ShuleGram application and website.</li>
+                        <li><strong>User</strong> means any individual using our Service.</li>
+                    </ul>
+                </div>
+                
+                <!-- More sections would go here -->
+                
+                <div class="policy-section" id="contact" data-aos="fade-up">
+                    <h2>8. Contact Us</h2>
+                    <p>If you have any questions about this policy, please contact us at:</p>
+                    <p>
+                        <strong>Email:</strong> privacy@shulegram.com<br>
+                        <strong>Address:</strong> 123 Education Street, Nairobi, Kenya
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="py-5 text-white" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); margin-top: 4rem;">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <a class="navbar-brand d-flex align-items-center mb-4" href="/">
+                        <img src="https://res.cloudinary.com/dtpevimcr/image/upload/v1762934774/Shulegram_logo_uwcvpn.png" 
+                             width="32" 
+                             height="32" 
+                             class="me-2" 
+                             alt="ShuleGram Logo">
+                        <span class="fw-bold" style="color: var(--primary-light);">ShuleGram</span>
+                    </a>
+                    <p class="text-muted">Connecting parents, teachers, and students for better education outcomes.</p>
+                    <div class="social-links">
+                        <a href="#" class="me-3 text-white"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="me-3 text-white"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="me-3 text-white"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3 col-lg-2">
+                    <h5 class="h6 fw-bold mb-4">Company</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none hover-text-white">About Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none hover-text-white">Careers</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none hover-text-white">Blog</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none hover-text-white">Press</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3 col-lg-2">
+                    <h5 class="h6 fw-bold mb-4">Product</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#features" class="text-muted text-decoration-none hover-text-white">Features</a></li>
+                        <li class="mb-2"><a href="#how-it-works" class="text-muted text-decoration-none hover-text-white">How It Works</a></li>
+                        <li class="mb-2"><a href="#pricing" class="text-muted text-decoration-none hover-text-white">Pricing</a></li>
+                        <li class="mb-2"><a href="#download" class="text-muted text-decoration-none hover-text-white">Download</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3 col-lg-2">
+                    <h5 class="h6 fw-bold mb-4">Support</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none hover-text-white">Help Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none hover-text-white">Contact Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none hover-text-white">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3 col-lg-2">
+                    <h5 class="h6 fw-bold mb-4">Legal</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="/privacy-policy" class="text-muted text-decoration-none hover-text-white">Privacy Policy</a></li>
+                        <li class="mb-2"><a href="/terms-and-conditions" class="text-muted text-decoration-none hover-text-white">Terms of Service</a></li>
+                        <li class="mb-2"><a href="/data-protection" class="text-muted text-decoration-none hover-text-white">Data Protection</a></li>
+                        <li class="mb-2"><a href="/child-protection-policy" class="text-muted text-decoration-none hover-text-white">Child Safety</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <p class="mb-0 text-muted">&copy; 2025 ShuleGram. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <div class="d-flex justify-content-center justify-content-md-end">
+                        <a href="#" class="text-muted text-decoration-none me-3 hover-text-white">Privacy</a>
+                        <a href="#" class="text-muted text-decoration-none me-3 hover-text-white">Terms</a>
+                        <a href="#" class="text-muted text-decoration-none hover-text-white">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to top button -->
+    <a href="#" class="back-to-top" id="backToTop" style="position: fixed; bottom: 2rem; right: 2rem; background: var(--primary); color: white; width: 3rem; height: 3rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 20px rgba(0,0,0,0.15); opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 999;">
+        <i class="bi bi-arrow-up"></i>
+    </a>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+        
+        // Navbar scroll effect
+        const navbar = document.getElementById('mainNav');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTop.style.opacity = '1';
+                backToTop.style.visibility = 'visible';
+            } else {
+                backToTop.style.opacity = '0';
+                backToTop.style.visibility = 'hidden';
+            }
+        });
+        
+        backToTop.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Highlight active section in TOC
+        const sections = document.querySelectorAll('.policy-section');
+        const navLinks = document.querySelectorAll('.toc-item');
+        
+        window.addEventListener('scroll', function() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Smooth scroll for TOC links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update URL without page jump
+                    if (history.pushState) {
+                        history.pushState(null, null, targetId);
+                    } else {
+                        location.hash = targetId;
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

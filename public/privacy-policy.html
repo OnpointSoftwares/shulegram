@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShuleGram - Data Protection & Privacy Policy</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="/src/css/policy-pages.css" rel="stylesheet">
     <style>
         :root {
             --primary-color: #9b7fd6;
@@ -397,8 +399,12 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="/">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cpath fill='%239b7fd6' d='M150,120 Q150,80 190,80 L190,120 Q190,160 230,160 L230,200 Q230,240 190,240 L190,280 Q190,320 150,320 L150,280 Q150,240 110,240 L110,200 Q110,160 150,160 Z'/%3E%3Cpath fill='%23b794e8' d='M250,130 L290,130 Q330,130 330,170 L330,210 Q330,250 290,250 L250,250 Z'/%3E%3Cpath fill='%237c5fb8' d='M250,160 L290,160 L290,190 L250,190 Z'/%3E%3C/svg%3E" width="32" height="32" class="me-2" alt="ShuleGram Logo">
-                <span style="font-weight: 700; font-size: 1.5rem; color: #9b7fd6;">ShuleGram</span>
+                <img src="https://res.cloudinary.com/dtpevimcr/image/upload/v1762934774/Shulegram_logo_uwcvpn.png" 
+                     width="32" 
+                     height="32" 
+                     class="me-2" 
+                     alt="ShuleGram Logo">
+                <span class="fw-bold">ShuleGram</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -406,30 +412,19 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/#features">Features</a>
+                        <a class="nav-link" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/#for-you">For You</a>
+                        <a class="nav-link" href="#features">Features</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/#study-booster">Study Booster</a>
+                        <a class="nav-link" href="#how-it-works">How It Works</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/#testimonials">Testimonials</a>
+                        <a class="nav-link" href="#download">Download</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/#download">Download</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="#" id="legalDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Legal
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="legalDropdown">
-                            <li><a class="dropdown-item active" href="/privacy-policy">Privacy Policy</a></li>
-                            <li><a class="dropdown-item" href="/child-protection-policy">Child Protection Policy</a></li>
-                            <li><a class="dropdown-item" href="/terms-and-conditions">Terms & Conditions</a></li>
-                            <li><a class="dropdown-item" href="/data-protection">Data Protection</a></li>
-                        </ul>
+                    <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                        <a href="#download" class="btn btn-primary">Get Started</a>
                     </li>
                 </ul>
             </div>
@@ -437,31 +432,25 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-section">
+    <section class="policy-hero">
         <div class="container">
-            <div class="text-center">
-                <div class="hero-icon">
-                    <i class="fas fa-shield-alt fa-2x text-white"></i>
-                </div>
-                <h1 class="display-4 fw-bold mb-3">Data Protection & Privacy Policy</h1>
-                <p class="lead text-muted mb-4">Protecting your privacy with transparency and trust</p>
-                <div class="policy-meta">
-                    <span><i class="fas fa-file-alt"></i> Version 1.0</span>
-                    <span><i class="fas fa-calendar"></i> Effective: 11/11/2025</span>
-                    <span><i class="fas fa-mobile-alt"></i> iOS & Android</span>
-                    <span><i class="fas fa-gavel"></i> Kenya DPA 2019</span>
+            <div class="row">
+                <div class="col-lg-10 mx-auto text-center">
+                    <h1 class="display-4 fw-bold mb-4">Data Protection & Privacy Policy</h1>
+                    <p class="lead mb-0">Your privacy is important to us. Learn how we protect and manage your personal information.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Main Content -->
-    <div class="container my-5">
-        <div class="row">
-            <!-- Table of Contents -->
-            <div class="col-lg-3">
-                <div class="toc">
-                    <h5 class="fw-bold mb-3"><i class="fas fa-list me-2"></i>Contents</h5>
+    <div class="container">
+        <div class="policy-content">
+            <div class="row">
+                <!-- Table of Contents -->
+                <div class="col-lg-3">
+                    <div class="toc position-sticky" style="top: 100px;">
+                        <h5 class="fw-bold mb-3"><i class="bi bi-list-ul me-2"></i>Contents</h5>
                     <a href="#section1" class="toc-item">1. Introduction</a>
                     <a href="#section2" class="toc-item">2. Definitions</a>
                     <a href="#section3" class="toc-item">3. Data We Collect</a>
