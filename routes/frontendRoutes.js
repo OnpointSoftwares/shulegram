@@ -35,7 +35,7 @@ Object.entries(staticPages).forEach(([route, file]) => {
 
 // Fallback to serve index.html for SPA routing
 router.get('*', (req, res) => {
-  res.sendFile(path.join(publicPath, 'src/index.html'));
+  res.sendFile(path.join(publicPath, 'index.html'));
 });
 
 module.exports = router;
