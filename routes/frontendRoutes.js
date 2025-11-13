@@ -8,7 +8,7 @@ const publicPath = path.join(__dirname, '../public');
 
 // Serve the main index.html for the root route
 router.get('/', (req, res) => {
-  res.sendFile(path.join(publicPath, 'src/index.html'));
+  res.sendFile(path.join(publicPath, 'index.html'));
 });
 
 // Serve static HTML files for legal pages
