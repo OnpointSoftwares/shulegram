@@ -151,10 +151,16 @@ app.listen(PORT, () => {
 ║   Port: ${PORT}                                           ║
 ║   Environment: ${process.env.NODE_ENV || 'development'}                              ║
 ║                                                        ║
-║   Endpoints:                                           ║
+║   M-Pesa Payment Endpoints:                            ║
 ║   - POST /api/payments/initialize                     ║
 ║   - GET  /api/payments/verify/:reference              ║
 ║   - POST /api/payments/mpesa                          ║
+║   - POST /api/payments/mpesa/direct                   ║
+║   - POST /api/payments/retry/:reference               ║
+║   - POST /api/payments/cancel/:reference              ║
+║   - GET  /api/payments/status/:reference              ║
+║   - GET  /api/payments/history/:userId               ║
+║   - POST /api/payments/validate-phone                ║
 ║   - POST /api/payments/release-escrow                 ║
 ║   - POST /api/payments/webhook                        ║
 ║                                                        ║

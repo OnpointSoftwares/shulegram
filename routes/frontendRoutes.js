@@ -8,7 +8,9 @@ const publicPath = path.join(__dirname, '../public');
 
 // Serve the main index.html for the root route
 router.get('/', (req, res) => {
-  res.sendFile(path.join(publicPath, 'index.html'));
+  const indexPath = path.join(publicPath, 'index.html');
+  console.log('Serving index from:', indexPath);
+  res.sendFile(indexPath);
 });
 
 // Serve static HTML files for legal pages
@@ -35,7 +37,9 @@ Object.entries(staticPages).forEach(([route, file]) => {
 
 // Fallback to serve index.html for SPA routing
 router.get('*', (req, res) => {
-  res.sendFile(path.join(publicPath, 'index.html'));
+  const indexPath = path.join(publicPath, 'index.html');
+  console.log('SPA fallback serving index from:', indexPath);
+  res.sendFile(indexPath);
 });
 
 module.exports = router;

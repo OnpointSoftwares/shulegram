@@ -4,63 +4,171 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShuleGram - Terms and Conditions</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="https://res.cloudinary.com/dtpevimcr/image/upload/v1762934774/Shulegram_logo_uwcvpn.png"/>
+    
+    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="/src/css/policy-pages.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #9b7fd6;
-            --secondary-color: #b794e8;
-            --accent-color: #7c5fb8;
-            --dark-bg: #f8f9fa;
-            --card-bg: #ffffff;
-            --text-light: #2c3e50;
-            --text-muted: #6c757d;
+            --primary: #7C3AED;
+            --primary-light: #E9D5FF;
+            --primary-dark: #5B21B6;
+            --accent: #FF6B9D;
+            --accent-light: #FFE4EC;
+            --dark: #1E1B4B;
+            --darker: #0F172A;
+            --light: #F9FAFB;
+            --gray: #4B5563;
+            --light-gray: #E5E7EB;
+            --white: #FFFFFF;
+            --text-primary: #1F2937;
+            --text-secondary: #4B5563;
             --warning: #fbbf24;
             --danger: #ef4444;
         }
 
-        * {
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            color: var(--text-light);
-            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            background-color: var(--white);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: var(--darker);
         }
 
         .navbar {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px rgba(155, 127, 214, 0.1);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 0.5rem 0;
+        }
+        
+        .navbar-brand {
+            margin-right: 0;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--darker) !important;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: var(--darker) !important;
+            margin: 0 0.5rem;
+            position: relative;
+            padding: 0.5rem 0.75rem !important;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--primary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 70%;
+        }
+        
+        .btn-get-started {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: white;
+            font-weight: 500;
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-get-started:hover {
+            background-color: #E11D8C;
+            border-color: #E11D8C;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .offcanvas {
+            max-width: 300px;
+            width: 100%;
+            z-index: 1045;
+        }
+        
+        .offcanvas-header {
+            border-bottom: 1px solid var(--light-gray);
+            padding: 1.25rem 1.5rem;
+        }
+        
+        .offcanvas-body {
+            padding: 1.5rem;
+        }
+        
+        .offcanvas-title {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.25rem;
         }
 
         .hero-section {
-            padding: 100px 0 60px;
-            background: linear-gradient(135deg, rgba(155, 127, 214, 0.1) 0%, rgba(183, 148, 232, 0.15) 100%);
-            border-bottom: 1px solid rgba(155, 127, 214, 0.2);
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #6D28D9 0%, #8B5CF6 50%, #EC4899 100%);
             position: relative;
             overflow: hidden;
+            color: white;
+            padding: 6rem 0;
+            margin-top: 80px;
+        }
+        
+        .hero-section h1 {
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 3.25rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-section p {
+            color: rgba(255,255,255,0.95);
+            font-size: 1.25rem;
+            max-width: 600px;
+            line-height: 1.7;
+            margin-bottom: 2rem;
         }
 
-        .hero-section::before {
-            content: '';
+        .wave-shape {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
             bottom: 0;
-            background: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&auto=format&fit=crop&q=80') center/cover;
-            opacity: 0.05;
-            z-index: 0;
-        }
-
-        .hero-section .container {
-            position: relative;
-            z-index: 1;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
         }
 
         .hero-icon {
@@ -390,85 +498,134 @@
             margin: 5px 5px 5px 0;
         }
 
-        @media (max-width: 768px) {
-            .toc {
-                position: static;
-                margin-bottom: 30px;
+        @media (max-width: 991.98px) {
+            .navbar-nav {
+                flex-wrap: wrap;
+                gap: 0;
             }
 
-            .definition-grid {
-                grid-template-columns: 1fr;
+            .navbar-nav .nav-link {
+                padding: 0.75rem 0 !important;
+                margin: 0;
+                border-bottom: 1px solid var(--light-gray);
+                font-size: 1rem;
+            }
+            
+            .navbar-nav .nav-link::after {
+                display: none;
+            }
+            
+            .navbar-nav .nav-item:last-child .nav-link {
+                border-bottom: none;
+            }
+            
+            .btn-get-started {
+                width: 100%;
+                margin-top: 1rem;
+                padding: 0.75rem 1.25rem;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <!-- Navbar (matching index) -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="/">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cpath fill='%239b7fd6' d='M150,120 Q150,80 190,80 L190,120 Q190,160 230,160 L230,200 Q230,240 190,240 L190,280 Q190,320 150,320 L150,280 Q150,240 110,240 L110,200 Q110,160 150,160 Z'/%3E%3Cpath fill='%23b794e8' d='M250,130 L290,130 Q330,130 330,170 L330,210 Q330,250 290,250 L250,250 Z'/%3E%3Cpath fill='%237c5fb8' d='M250,160 L290,160 L290,190 L250,190 Z'/%3E%3C/svg%3E" width="32" height="32" class="me-2" alt="ShuleGram Logo">
-                <span style="font-weight: 700; font-size: 1.5rem; color: #9b7fd6;">ShuleGram</span>
+                <img src="https://res.cloudinary.com/dtpevimcr/image/upload/v1762934774/Shulegram_logo_uwcvpn.png" 
+                     width="32" 
+                     height="32" 
+                     class="d-inline-block align-text-top me-2" 
+                     alt="ShuleGram Logo">
+                <span class="fw-bold">ShuleGram</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" 
+                    aria-controls="navbarOffcanvas" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+            <div class="collapse navbar-collapse d-none d-lg-flex" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="/#features">Features</a>
+                        <a class="nav-link" href="/#home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/#for-you">For You</a>
+                        <a class="nav-link" href="/#for-parents">For Parent/Guardian</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/#for-teachers">For Teachers</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/#study-booster">Study Booster</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/#how-it-works">How It Works</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/#testimonials">Testimonials</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/#download">Download</a>
+                        <a class="nav-link" href="/#pre-career-support">Pre-career Support</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="#" id="legalDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Legal
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="legalDropdown">
-                            <li><a class="dropdown-item" href="/privacy-policy">Privacy Policy</a></li>
-                            <li><a class="dropdown-item" href="/child-protection-policy">Child Protection Policy</a></li>
-                            <li><a class="dropdown-item active" href="/terms-and-conditions">Terms & Conditions</a></li>
-                            <li><a class="dropdown-item" href="/data-protection">Data Protection</a></li>
-                        </ul>
+                    <li class="nav-item ms-lg-3">
+                        <a href="/#download" class="btn btn-get-started">Get Started</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container">
-            <div class="text-center">
-                <div class="hero-icon">
-                    <i class="fas fa-file-contract fa-2x text-white"></i>
-                </div>
-                <h1 class="display-4 fw-bold mb-3">Terms and Conditions</h1>
-                <p class="lead text-muted mb-3">Legal agreement governing your use of ShuleGram</p>
-                <div class="last-updated">
-                    <i class="fas fa-calendar-alt"></i>
-                    Last Updated: 11/11/2025
-                </div>
-            </div>
+    <!-- Mobile Menu (Offcanvas) as body child for reliable stacking -->
+    <div class="offcanvas offcanvas-end d-lg-none" tabindex="-1" id="navbarOffcanvas" aria-labelledby="navbarOffcanvasLabel" data-bs-scroll="false" data-bs-backdrop="true">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="navbarOffcanvasLabel">Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/#home" data-bs-dismiss="offcanvas">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/#for-parents" data-bs-dismiss="offcanvas">For Parent/Guardian</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/#for-teachers" data-bs-dismiss="offcanvas">For Teachers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/#study-booster" data-bs-dismiss="offcanvas">Study Booster</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/#pre-career-support" data-bs-dismiss="offcanvas">Pre-career Support</a>
+                </li>
+                <li class="nav-item mt-3">
+                    <a href="/#download" class="btn btn-get-started w-100" data-bs-dismiss="offcanvas">Get Started</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 
-            <div class="important-notice">
-                <h4><i class="fas fa-exclamation-triangle"></i> IMPORTANT LEGAL NOTICE</h4>
-                <p class="mb-3"><strong>PLEASE READ THESE TERMS AND CONDITIONS CAREFULLY BEFORE USING THE SHULEGRAM SERVICE. THIS IS A LEGALLY BINDING AGREEMENT.</strong></p>
-                <p class="mb-0">By creating an account, accessing, or using the ShuleGram mobile application and related services (the "Service"), you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions ("Terms"). If you are acting on behalf of a school or institution you represent, that you have the authority to bind that entity to these Terms.</p>
-                <div class="alert alert-danger mt-3 mb-0" style="border-left: 4px solid var(--danger);">
-                    <strong><i class="fas fa-ban me-2"></i>If you do not agree to these Terms, you are not allowed to access or use the Service.</strong>
+    <!-- Hero Section -->
+    <section class="hero-section position-relative" style="min-height: 60vh; display: flex; align-items: center; background: linear-gradient(135deg, rgba(109, 40, 217, 0.95) 0%, rgba(139, 92, 246, 0.9) 50%, rgba(236, 72, 153, 0.85) 100%), url('https://images.unsplash.com/photo-1503676260728-1c00da094a05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80') center/cover no-repeat; overflow: hidden; position: relative; z-index: 1;">
+        <!-- Dark Overlay -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.3);"></div>
+        <!-- Pattern Overlay -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.15; background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48cGF0dGVybiBpZD0icGF0dGVybiIgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBwYXR0ZXJuVHJhbnNmb3JtPSJyb3RhdGUoNDUpIj48cmVjdCB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuMDgiLz48L3BhdHRlcm4+PC9zdmc+');" style="pointer-events: none;"></div>
+        <div class="container py-5" style="position: relative; z-index: 2;">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mx-auto text-center text-white">
+                    <h1 class="display-4 fw-bold mb-4">Terms and Conditions</h1>
+                    <p class="lead mb-0" style="color: rgba(255,255,255,0.95);">Legal agreement governing your use of ShuleGram</p>
                 </div>
             </div>
+        </div>
+        <div class="wave-shape" style="position:absolute;bottom:0;left:0;width:100%;line-height:0;">
+            <svg viewBox="0 0 1440 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 100C0 100 300 0 720 100C1140 200 1440 100 1440 100V200H0V100Z" fill="white"/>
+            </svg>
         </div>
     </section>
 
