@@ -3,316 +3,453 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShuleGram - Children's Protection Policy</title>
+    <title>ShuleGram - Child Protection Policy</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="https://res.cloudinary.com/dtpevimcr/image/upload/v1762934774/Shulegram_logo_uwcvpn.png"/>
+    
+    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="/src/css/policy-pages.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <style>
         :root {
-            --primary-color: #9b7fd6;
-            --secondary-color: #b794e8;
-            --accent-color: #7c5fb8;
-            --dark-bg: #f8f9fa;
-            --card-bg: #ffffff;
-            --text-light: #2c3e50;
-            --text-muted: #6c757d;
+            --primary: #7C3AED;
+            --primary-light: #E9D5FF;
+            --primary-dark: #5B21B6;
+            --accent: #FF6B9D;
+            --accent-light: #FFE4EC;
+            --dark: #1E1B4B;
+            --darker: #0F172A;
+            --light: #F9FAFB;
+            --gray: #4B5563;
+            --light-gray: #E5E7EB;
+            --white: #FFFFFF;
+            --text-primary: #1F2937;
+            --text-secondary: #4B5563;
         }
-
-        * {
-            scroll-behavior: smooth;
-        }
-
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            color: var(--text-light);
-            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            background-color: var(--white);
         }
-
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: var(--darker);
+        }
+        
+        /* Navbar Styles */
         .navbar {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px rgba(155, 127, 214, 0.1);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
         }
-
+        
+        .navbar.scrolled {
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 0.5rem 0;
+        }
+        
         .navbar-brand {
+            margin-right: 0px;
             font-weight: 700;
             font-size: 1.5rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--darker) !important;
         }
-
-        .hero-section {
-            padding: 100px 0 80px;
-            background: linear-gradient(135deg, rgba(155, 127, 214, 0.1) 0%, rgba(183, 148, 232, 0.15) 100%);
-            border-bottom: 1px solid rgba(155, 127, 214, 0.2);
+        
+        .navbar-brand img {
+            transition: transform 0.3s ease;
+        }
+        
+        .navbar-brand:hover img {
+            transform: rotate(10deg);
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: var(--darker) !important;
+            margin: 0 0.5rem;
             position: relative;
-            overflow: hidden;
+            padding: 0.5rem 0.75rem !important;
+            transition: color 0.3s ease;
         }
-
-        .hero-section::before {
+        
+        .nav-link::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            width: 0;
+            height: 2px;
             bottom: 0;
-            background: url('https://images.unsplash.com/photo-1577896851231-70ef18881754?w=1200&auto=format&fit=crop&q=80') center/cover;
-            opacity: 0.1;
-            z-index: 0;
+            left: 50%;
+            background-color: var(--primary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
         }
-
-        .hero-section .container {
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 70%;
+        }
+        
+        .btn-get-started {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: white;
+            font-weight: 500;
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-get-started:hover {
+            background-color: #E11D8C;
+            border-color: #E11D8C;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Mobile Menu Styles */
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+            z-index: 1050;
+        }
+        
+        .navbar-toggler:focus {
+            box-shadow: none;
+            outline: none;
+        }
+        
+        .offcanvas-header {
+            border-bottom: 2px solid var(--light-gray);
+            padding: 1.5rem;
+        }
+        
+        .offcanvas-body {
+            padding: 1.5rem;
+        }
+        
+        .offcanvas-title {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+        
+        .btn-close:focus {
+            box-shadow: none;
+            outline: none;
+        }
+        
+        @media (max-width: 991.98px) {
+            .navbar-nav .nav-link {
+                padding: 0.75rem 0 !important;
+                margin: 0;
+                border-bottom: 1px solid var(--light-gray);
+                font-size: 1rem;
+            }
+            
+            .navbar-nav .nav-link::after {
+                display: none;
+            }
+            
+            .navbar-nav .nav-item:last-child .nav-link {
+                border-bottom: none;
+            }
+            
+            .btn-get-started {
+                width: 100%;
+                margin-top: 1rem;
+                padding: 0.75rem 1.25rem;
+            }
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            min-height: 60vh;
+            max-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #6D28D9 0%, #8B5CF6 50%, #EC4899 100%);
             position: relative;
-            z-index: 1;
+            overflow: visible;
+            color: white;
+            padding: 8rem 0 6rem;
+            margin-top: 80px; /* Space for fixed navbar */
         }
-
+        
+        .hero-section h1 {
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-section p {
+            color: rgba(255,255,255,0.95);
+            font-size: 1.25rem;
+            line-height: 1.7;
+            position: relative;
+            z-index: 2;
+        }
+        
         .hero-icon {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+            backdrop-filter: blur(10px);
         }
-
+        
         .policy-meta {
             display: inline-flex;
             gap: 20px;
             padding: 12px 24px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 50px;
-            border: 1px solid rgba(155, 127, 214, 0.3);
-            box-shadow: 0 4px 12px rgba(155, 127, 214, 0.1);
+            backdrop-filter: blur(10px);
         }
-
+        
         .policy-meta span {
             display: flex;
             align-items: center;
             gap: 8px;
             font-size: 0.9rem;
-            color: var(--primary-color);
+            color: white;
             font-weight: 600;
         }
-
-        .section-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 35px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(155, 127, 214, 0.15);
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(155, 127, 214, 0.08);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .section-card::before {
-            content: '';
+        
+        .wave-shape {
             position: absolute;
-            top: 0;
-            right: 0;
-            width: 200px;
-            height: 200px;
-            background: url('https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=400&auto=format&fit=crop&q=80') center/cover;
-            opacity: 0.03;
-            border-radius: 50%;
-            transform: translate(50%, -50%);
-            pointer-events: none;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
         }
-
+        
+        /* Section Card */
+        .section-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--light-gray);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
         .section-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(155, 127, 214, 0.15);
-            border-color: var(--primary-color);
+            box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.1);
+            border-color: var(--primary-light);
         }
-
+        
         .section-number {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        .section-title {
-            color: var(--text-light);
-            font-weight: 700;
-            margin-bottom: 20px;
             font-size: 1.5rem;
+            color: white;
+            margin-bottom: 1.5rem;
         }
-
+        
+        .section-title {
+            color: var(--darker);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-size: 1.75rem;
+        }
+        
         .principle-item {
-            background: rgba(155, 127, 214, 0.05);
-            padding: 15px 20px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            border-left: 4px solid var(--primary-color);
+            background: var(--primary-light);
+            padding: 1.25rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary);
             transition: all 0.3s ease;
         }
-
+        
         .principle-item:hover {
-            background: rgba(155, 127, 214, 0.1);
+            background: var(--primary);
+            color: white;
             transform: translateX(5px);
         }
-
+        
         .principle-item strong {
-            color: var(--primary-color);
+            color: var(--primary-dark);
         }
-
+        
+        .principle-item:hover strong {
+            color: white;
+        }
+        
         .measure-category {
-            background: rgba(155, 127, 214, 0.05);
-            padding: 20px;
+            background: var(--light);
+            padding: 1.5rem;
             border-radius: 12px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(155, 127, 214, 0.15);
-            position: relative;
-            overflow: hidden;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--light-gray);
         }
-
-        .measure-category::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 120px;
-            height: 120px;
-            background: url('https://images.unsplash.com/photo-1609220136736-443140cffec6?w=300&auto=format&fit=crop&q=80') center/cover;
-            opacity: 0.04;
-            border-radius: 50%;
-            transform: translate(30%, 30%);
-        }
-
+        
         .measure-category h5 {
-            color: var(--secondary-color);
+            color: var(--primary);
             font-weight: 600;
-            margin-bottom: 15px;
+            margin-bottom: 1rem;
         }
-
+        
         .feature-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
             padding: 8px 16px;
-            background: linear-gradient(135deg, rgba(155, 127, 214, 0.15), rgba(183, 148, 232, 0.15));
+            background: white;
             border-radius: 50px;
             font-size: 0.9rem;
             margin: 5px;
-            border: 1px solid rgba(155, 127, 214, 0.3);
-            color: var(--primary-color);
+            border: 1px solid var(--primary-light);
+            color: var(--primary);
             font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
-
+        
         .prohibited-item {
             background: rgba(239, 68, 68, 0.1);
-            padding: 12px 18px;
+            padding: 1rem 1.25rem;
             border-radius: 8px;
-            margin-bottom: 10px;
-            border-left: 3px solid #ef4444;
+            margin-bottom: 0.75rem;
+            border-left: 4px solid #ef4444;
+            color: var(--text-primary);
         }
-
+        
         .contact-card {
-            background: linear-gradient(135deg, rgba(155, 127, 214, 0.1), rgba(183, 148, 232, 0.12));
-            border: 2px solid var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-light));
+            border: 2px solid var(--primary);
             border-radius: 16px;
-            padding: 30px;
+            padding: 2rem;
             text-align: center;
+            height: 100%;
         }
-
+        
         .contact-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--primary-color);
+            width: 70px;
+            height: 70px;
+            background: var(--primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 15px;
+            margin: 0 auto 1rem;
         }
-
+        
         .btn-primary-custom {
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            background: linear-gradient(135deg, var(--primary), var(--accent));
             border: none;
             padding: 12px 30px;
             border-radius: 50px;
             font-weight: 600;
             transition: all 0.3s ease;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
         }
-
+        
         .btn-primary-custom:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.4);
+            color: white;
         }
-
+        
         .toc {
-            background: rgba(255, 255, 255, 0.9);
+            background: white;
             border-radius: 12px;
-            padding: 25px;
+            padding: 1.5rem;
             position: sticky;
-            top: 80px;
-            border: 1px solid rgba(155, 127, 214, 0.2);
-            box-shadow: 0 2px 8px rgba(155, 127, 214, 0.08);
+            top: 100px;
+            border: 1px solid var(--light-gray);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
-
+        
         .toc-item {
-            padding: 10px 15px;
-            margin-bottom: 8px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
             border-radius: 8px;
             transition: all 0.3s ease;
             cursor: pointer;
             display: block;
             text-decoration: none;
-            color: var(--text-muted);
+            color: var(--text-secondary);
+            border-left: 3px solid transparent;
         }
-
+        
         .toc-item:hover {
-            background: rgba(155, 127, 214, 0.1);
-            color: var(--text-light);
+            background: var(--primary-light);
+            color: var(--primary-dark);
             transform: translateX(5px);
+            border-left-color: var(--primary);
         }
-
-        .footer {
-            background: #ffffff;
-            padding: 40px 0;
-            margin-top: 60px;
-            border-top: 1px solid rgba(155, 127, 214, 0.2);
-            position: relative;
+        
+        .toc-item.active {
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            border-left-color: var(--primary);
         }
-
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1554344728-7758a47b8f42?w=1200&auto=format&fit=crop&q=80') center/cover;
-            opacity: 0.03;
-            z-index: 0;
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: rgba(255, 255, 255, 0.9);
+            padding: 3rem 0;
+            margin-top: 4rem;
         }
-
-        .footer .container {
-            position: relative;
-            z-index: 1;
+        
+        footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
-
+        
+        footer a:hover {
+            color: white;
+            text-decoration: none;
+        }
+        
+        footer .text-muted {
+            color: rgba(255, 255, 255, 0.6) !important;
+        }
+        
         .scroll-top {
             position: fixed;
             bottom: 30px;
             right: 30px;
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            background: linear-gradient(135deg, var(--primary), var(--accent));
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -321,96 +458,135 @@
             opacity: 0;
             transition: all 0.3s ease;
             z-index: 1000;
-            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 5px 15px rgba(124, 58, 237, 0.4);
         }
-
+        
         .scroll-top.visible {
             opacity: 1;
         }
-
+        
         .scroll-top:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.6);
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.6);
         }
-
+        
         @media (max-width: 768px) {
             .toc {
                 position: static;
-                margin-bottom: 30px;
+                margin-bottom: 2rem;
+            }
+            
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            .policy-meta {
+                flex-direction: column;
+                gap: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="/">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cpath fill='%239b7fd6' d='M150,120 Q150,80 190,80 L190,120 Q190,160 230,160 L230,200 Q230,240 190,240 L190,280 Q190,320 150,320 L150,280 Q150,240 110,240 L110,200 Q110,160 150,160 Z'/%3E%3Cpath fill='%23b794e8' d='M250,130 L290,130 Q330,130 330,170 L330,210 Q330,250 290,250 L250,250 Z'/%3E%3Cpath fill='%237c5fb8' d='M250,160 L290,160 L290,190 L250,190 Z'/%3E%3C/svg%3E" width="32" height="32" class="me-2" alt="ShuleGram Logo">
-                <span style="font-weight: 700; font-size: 1.5rem; color: #9b7fd6;">ShuleGram</span>
+                <img src="https://res.cloudinary.com/dtpevimcr/image/upload/v1762934774/Shulegram_logo_uwcvpn.png" 
+                    style="height:72px;width:72px"
+                     class="me-2" 
+                     alt="ShuleGram Logo">
+                ShuleGram
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" 
+                    aria-controls="navbarOffcanvas" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+            
+            <!-- Desktop Menu -->
+            <div class="collapse navbar-collapse d-none d-lg-flex" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="/#features">Features</a>
+                        <a class="nav-link" href="/#home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/#for-you">For You</a>
+                        <a class="nav-link" href="/#for-parents">For Parent/Guardian</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/#for-teachers">For Teachers</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/#study-booster">Study Booster</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/#testimonials">Testimonials</a>
+                        <a class="nav-link active" href="/child-protection-policy">Legal</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/#download">Download</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="#" id="legalDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Legal
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="legalDropdown">
-                            <li><a class="dropdown-item" href="/privacy-policy">Privacy Policy</a></li>
-                            <li><a class="dropdown-item active" href="/child-protection-policy">Child Protection Policy</a></li>
-                            <li><a class="dropdown-item" href="/terms-and-conditions">Terms & Conditions</a></li>
-                            <li><a class="dropdown-item" href="/data-protection">Data Protection</a></li>
-                        </ul>
+                    <li class="nav-item ms-lg-3">
+                        <a href="/#download" class="btn btn-get-started">Get Started</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
+    <!-- Mobile Menu (Offcanvas) as body child -->
+    <div class="offcanvas offcanvas-end d-lg-none" tabindex="-1" id="navbarOffcanvas" aria-labelledby="navbarOffcanvasLabel" data-bs-scroll="false" data-bs-backdrop="true">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="navbarOffcanvasLabel">Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/#home" data-bs-dismiss="offcanvas">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/#for-parents" data-bs-dismiss="offcanvas">For Parent/Guardian</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/#for-teachers" data-bs-dismiss="offcanvas">For Teachers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/#study-booster" data-bs-dismiss="offcanvas">Study Booster</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/child-protection-policy" data-bs-dismiss="offcanvas">Legal</a>
+                </li>
+                <li class="nav-item mt-3">
+                    <a href="/#download" class="btn btn-get-started w-100" data-bs-dismiss="offcanvas">Get Started</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
     <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container">
-            <div class="text-center">
-                <div class="hero-icon">
-                    <i class="fas fa-child fa-2x text-white"></i>
-                </div>
-                <h1 class="display-4 fw-bold mb-3">Children's Protection Policy</h1>
-                <p class="lead text-muted mb-4">Comprehensive safety measures for every child on our platform</p>
-                <div class="policy-meta">
-                    <span><i class="fas fa-file-alt"></i> Version 1.0</span>
-                    <span><i class="fas fa-calendar"></i> Effective: 11/11/2025</span>
-                    <span><i class="fas fa-mobile-alt"></i> ShuleGram App</span>
+    <section class="hero-section position-relative" style="min-height: 60vh; display: flex; align-items: center; background: linear-gradient(135deg, rgba(109, 40, 217, 0.95) 0%, rgba(139, 92, 246, 0.9) 50%, rgba(236, 72, 153, 0.85) 100%), url('https://images.unsplash.com/photo-1503676260728-1c00da094a05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80') center/cover no-repeat; overflow: hidden; position: relative; z-index: 1;">
+        <!-- Dark Overlay -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.3);"></div>
+        <!-- Pattern Overlay -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.15; background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48cGF0dGVybiBpZD0icGF0dGVybiIgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBwYXR0ZXJuVHJhbnNmb3JtPSJyb3RhdGUoNDUpIj48cmVjdCB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuMDgiLz48L3BhdHRlcm4+PC9zdmc+');" style="pointer-events: none;"></div>
+        <div class="container py-5" style="position: relative; z-index: 2;">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mx-auto text-center text-white">
+                    <h1 class="display-4 fw-bold mb-4">Child Protection Policy</h1>
+                    <p class="lead mb-0" style="color: rgba(255,255,255,0.95);">Comprehensive safety measures for every child on our platform</p>
                 </div>
             </div>
+        </div>
+        <div class="wave-shape" style="position:absolute;bottom:0;left:0;width:100%;line-height:0;">
+            <svg viewBox="0 0 1440 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 100C0 100 300 0 720 100C1140 200 1440 100 1440 100V200H0V100Z" fill="white"/>
+            </svg>
         </div>
     </section>
 
     <!-- Main Content -->
-    <div class="container">
-        <div class="policy-content">
-            <div class="row">
-                <!-- Table of Contents -->
-                <div class="col-lg-3">
-                    <div class="toc position-sticky" style="top: 100px;">
-                        <h5 class="fw-bold mb-3"><i class="bi bi-list-ul me-2"></i>Contents</h5>
+    <div class="container my-5">
+        <div class="row">
+            <!-- Table of Contents -->
+            <div class="col-lg-3">
+                <div class="toc">
+                    <h5 class="fw-bold mb-3"><i class="bi bi-list-ul me-2"></i>Contents</h5>
                     <a href="#section1" class="toc-item">1. Our Commitment</a>
                     <a href="#section2" class="toc-item">2. Definition</a>
                     <a href="#section3" class="toc-item">3. Core Principles</a>
@@ -427,13 +603,13 @@
                 <!-- Section 1 -->
                 <div class="section-card" id="section1">
                     <div class="section-number">1</div>
-                    <h2 class="section-title" style="position: relative; z-index: 2;">Our Commitment to Child Safety</h2>
-                    <p style="position: relative; z-index: 2;">At ShuleGram, the safety, privacy, and well-being of Children ("Learners") are the foundation of our platform. This policy outlines the specific, non-negotiable measures we take to protect every child using our services.</p>
-                    <div class="alert alert-info border-0" style="background: rgba(155, 127, 214, 0.1); color: var(--text-light); border-left: 4px solid var(--primary-color); position: relative; z-index: 2;">
-                        <i class="fas fa-info-circle me-2" style="color: var(--primary-color);"></i>
+                    <h2 class="section-title">Our Commitment to Child Safety</h2>
+                    <p>At ShuleGram, the safety, privacy, and well-being of Children ("Learners") are the foundation of our platform. This policy outlines the specific, non-negotiable measures we take to protect every child using our services.</p>
+                    <div class="alert alert-info border-0" style="background: var(--primary-light); color: var(--text-primary); border-left: 4px solid var(--primary);">
+                        <i class="bi bi-info-circle me-2" style="color: var(--primary);"></i>
                         <strong>Safety by Design:</strong> Every feature is built with a child's protection as the primary requirement.
                     </div>
-                    <p class="text-muted mb-0" style="position: relative; z-index: 2;"><small>This policy supplements our main Data Protection Policy and should be read in conjunction with it.</small></p>
+                    <p class="text-muted mb-0"><small>This policy supplements our main Data Protection Policy and should be read in conjunction with it.</small></p>
                 </div>
 
                 <!-- Section 2 -->
@@ -470,20 +646,20 @@
                     <h2 class="section-title">Key Protective Measures</h2>
                     
                     <div class="measure-category">
-                        <h5 style="position: relative; z-index: 2;"><i class="fas fa-user-check me-2"></i>Account Creation and Verification</h5>
-                        <ul class="list-unstyled" style="position: relative; z-index: 2;">
-                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>A Child cannot create their own account</li>
-                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Accounts for Learners are created by verified Teachers or Parents</li>
-                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Mandatory parental consent before profile activation</li>
-                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Teacher accounts verified against school records and TSC database</li>
+                        <h5><i class="bi bi-person-check me-2"></i>Account Creation and Verification</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>A Child cannot create their own account</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Accounts for Learners are created by verified Teachers or Parents</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Mandatory parental consent before profile activation</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Teacher accounts verified against school records and TSC database</li>
                         </ul>
                     </div>
 
                     <div class="measure-category">
-                        <h5><i class="fas fa-lock me-2"></i>Strictly Controlled Visibility and Interaction</h5>
-                        <div class="feature-badge"><i class="fas fa-shield-alt"></i> Walled Garden</div>
-                        <div class="feature-badge"><i class="fas fa-ban"></i> No Private Messaging</div>
-                        <div class="feature-badge"><i class="fas fa-eye"></i> Moderated Interactions</div>
+                        <h5><i class="bi bi-lock-fill me-2"></i>Strictly Controlled Visibility and Interaction</h5>
+                        <div class="feature-badge"><i class="bi bi-shield-fill-check"></i> Walled Garden</div>
+                        <div class="feature-badge"><i class="bi bi-slash-circle"></i> No Private Messaging</div>
+                        <div class="feature-badge"><i class="bi bi-eye-fill"></i> Moderated Interactions</div>
                         <p class="mt-3 mb-2">A Child's profile, photos, videos, and showcased work are never publicly visible. Access is restricted to:</p>
                         <ul>
                             <li>The Child's verified Parent(s)/Guardian(s)</li>
@@ -493,23 +669,23 @@
                     </div>
 
                     <div class="measure-category">
-                        <h5><i class="fas fa-photo-video me-2"></i>Advanced Media Safeguards</h5>
+                        <h5><i class="bi bi-camera-video me-2"></i>Advanced Media Safeguards</h5>
                         <div class="row">
                             <div class="col-md-4 mb-3">
                                 <div class="text-center">
-                                    <div class="feature-badge w-100"><i class="fas fa-user-secret"></i> Facial Blurring</div>
+                                    <div class="feature-badge w-100 justify-content-center"><i class="bi bi-incognito"></i> Facial Blurring</div>
                                     <p class="small text-muted mt-2">Automatic blurring in group photos for children without consent</p>
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <div class="text-center">
-                                    <div class="feature-badge w-100"><i class="fas fa-eye-slash"></i> View-Once Mode</div>
+                                    <div class="feature-badge w-100 justify-content-center"><i class="bi bi-eye-slash-fill"></i> View-Once Mode</div>
                                     <p class="small text-muted mt-2">Sensitive content viewable only once per recipient</p>
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <div class="text-center">
-                                    <div class="feature-badge w-100"><i class="fas fa-fingerprint"></i> Watermarking</div>
+                                    <div class="feature-badge w-100 justify-content-center"><i class="bi bi-fingerprint"></i> Watermarking</div>
                                     <p class="small text-muted mt-2">All media imperceptibly watermarked with user ID</p>
                                 </div>
                             </div>
@@ -517,7 +693,7 @@
                     </div>
 
                     <div class="measure-category">
-                        <h5><i class="fas fa-brain me-2"></i>AI and Analytics with Guardrails</h5>
+                        <h5><i class="bi bi-cpu me-2"></i>AI and Analytics with Guardrails</h5>
                         <ul>
                             <li>Purpose-limited AI strictly for educational support</li>
                             <li>Behavioral analytics for positive feedback only</li>
@@ -527,7 +703,7 @@
                     </div>
 
                     <div class="measure-category">
-                        <h5><i class="fas fa-shopping-bag me-2"></i>Safe Marketplace (Parents Only)</h5>
+                        <h5><i class="bi bi-bag-check me-2"></i>Safe Marketplace (Parents Only)</h5>
                         <ul>
                             <li>Services marketplace is a parent-only feature</li>
                             <li>Learners cannot see, access, or interact with the marketplace</li>
@@ -540,21 +716,21 @@
                 <div class="section-card" id="section5">
                     <div class="section-number">5</div>
                     <h2 class="section-title">Prohibited Conduct and Reporting</h2>
-                    <h5 class="text-danger mb-3"><i class="fas fa-exclamation-triangle me-2"></i>Strictly Prohibited:</h5>
+                    <h5 class="text-danger mb-3"><i class="bi bi-exclamation-triangle-fill me-2"></i>Strictly Prohibited:</h5>
                     <div class="prohibited-item">
-                        <i class="fas fa-times-circle me-2"></i>Sharing abusive, bullying, sexually suggestive, or harmful content
+                        <i class="bi bi-x-circle-fill me-2"></i>Sharing abusive, bullying, sexually suggestive, or harmful content
                     </div>
                     <div class="prohibited-item">
-                        <i class="fas fa-times-circle me-2"></i>Using the platform to harass or groom a Child
+                        <i class="bi bi-x-circle-fill me-2"></i>Using the platform to harass or groom a Child
                     </div>
                     <div class="prohibited-item">
-                        <i class="fas fa-times-circle me-2"></i>Attempting to contact a Child outside moderated channels
+                        <i class="bi bi-x-circle-fill me-2"></i>Attempting to contact a Child outside moderated channels
                     </div>
                     <div class="prohibited-item">
-                        <i class="fas fa-times-circle me-2"></i>Downloading and redistributing a Child's image without permission
+                        <i class="bi bi-x-circle-fill me-2"></i>Downloading and redistributing a Child's image without permission
                     </div>
-                    <div class="alert alert-warning border-0 mt-4" style="background: rgba(255, 193, 7, 0.1); color: var(--text-light); border-left: 4px solid #ffc107;">
-                        <h6><i class="fas fa-flag me-2" style="color: #ffc107;"></i>Report a Concern</h6>
+                    <div class="alert alert-warning border-0 mt-4" style="background: rgba(255, 193, 7, 0.1); color: var(--text-primary); border-left: 4px solid #ffc107;">
+                        <h6><i class="bi bi-flag-fill me-2" style="color: #ffc107;"></i>Report a Concern</h6>
                         <p class="mb-0">We provide a simple, prominent "Report a Concern" button within the app. All reports are reviewed by our dedicated human moderation team within 24 hours.</p>
                     </div>
                 </div>
@@ -567,27 +743,27 @@
                     <div class="row g-3">
                         <div class="col-md-6">
                             <div class="principle-item">
-                                <i class="fas fa-check me-2"></i>Give, refuse, or withdraw consent at any time
+                                <i class="bi bi-check-circle-fill me-2"></i>Give, refuse, or withdraw consent at any time
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="principle-item">
-                                <i class="fas fa-check me-2"></i>Review all data we hold about your Child
+                                <i class="bi bi-check-circle-fill me-2"></i>Review all data we hold about your Child
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="principle-item">
-                                <i class="fas fa-check me-2"></i>Request correction or deletion of data
+                                <i class="bi bi-check-circle-fill me-2"></i>Request correction or deletion of data
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="principle-item">
-                                <i class="fas fa-check me-2"></i>Control Learner Profile settings (10+ years)
+                                <i class="bi bi-check-circle-fill me-2"></i>Control Learner Profile settings (10+ years)
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="principle-item">
-                                <i class="fas fa-check me-2"></i>Be notified of any breach or incident involving your Child's data
+                                <i class="bi bi-check-circle-fill me-2"></i>Be notified of any breach or incident involving your Child's data
                             </div>
                         </div>
                     </div>
@@ -601,13 +777,13 @@
                     <div class="row mt-4">
                         <div class="col-md-6 mb-3">
                             <div class="measure-category">
-                                <h6><i class="fas fa-users me-2"></i>Resources for Parents</h6>
+                                <h6><i class="bi bi-people-fill me-2"></i>Resources for Parents</h6>
                                 <p class="mb-0 small">Guides on digital safety and how to talk to children about online privacy</p>
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <div class="measure-category">
-                                <h6><i class="fas fa-chalkboard-teacher me-2"></i>Training for Teachers</h6>
+                                <h6><i class="bi bi-person-video3 me-2"></i>Training for Teachers</h6>
                                 <p class="mb-0 small">Guidelines on responsible sharing and recognizing signs of digital distress</p>
                             </div>
                         </div>
@@ -622,12 +798,12 @@
                         <div class="col-md-6">
                             <div class="contact-card">
                                 <div class="contact-icon">
-                                    <i class="fas fa-shield-alt fa-2x text-white"></i>
+                                    <i class="bi bi-shield-fill-exclamation fs-2 text-white"></i>
                                 </div>
                                 <h5 class="fw-bold">Child Safety Officer</h5>
                                 <p class="text-muted">For urgent safety concerns</p>
                                 <a href="mailto:childsafety@shulegram.co.ke" class="btn btn-primary-custom">
-                                    <i class="fas fa-envelope me-2"></i>childsafety@shulegram.co.ke
+                                    <i class="bi bi-envelope-fill me-2"></i>childsafety@shulegram.co.ke
                                 </a>
                                 <p class="small text-muted mt-3 mb-0">This channel is monitored closely for urgent response</p>
                             </div>
@@ -635,12 +811,12 @@
                         <div class="col-md-6">
                             <div class="contact-card">
                                 <div class="contact-icon">
-                                    <i class="fas fa-user-shield fa-2x text-white"></i>
+                                    <i class="bi bi-person-badge fs-2 text-white"></i>
                                 </div>
                                 <h5 class="fw-bold">Data Protection Officer</h5>
                                 <p class="text-muted">For privacy inquiries</p>
                                 <a href="mailto:dpo@shulegram.co.ke" class="btn btn-primary-custom">
-                                    <i class="fas fa-envelope me-2"></i>dpo@shulegram.co.ke
+                                    <i class="bi bi-envelope-fill me-2"></i>dpo@shulegram.co.ke
                                 </a>
                                 <p class="small text-muted mt-3 mb-0">For all other data privacy inquiries</p>
                             </div>
@@ -652,16 +828,84 @@
     </div>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="py-5 text-white">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 mb-3">
-                    <h5 class="fw-bold">ShuleGram</h5>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <a class="navbar-brand d-flex align-items-center mb-4" href="/">
+                        <img src="https://res.cloudinary.com/dtpevimcr/image/upload/v1762934774/Shulegram_logo_uwcvpn.png" 
+                             width="32" 
+                             height="32" 
+                             class="me-2" 
+                             alt="ShuleGram Logo">
+                        <span class="fw-bold" style="color: white;">ShuleGram</span>
+                    </a>
                     <p class="text-muted">Protecting children through technology and trust.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-white opacity-75" style="transition: opacity 0.3s;">
+                            <i class="bi bi-facebook fs-4"></i>
+                        </a>
+                        <a href="#" class="text-white opacity-75" style="transition: opacity 0.3s;">
+                            <i class="bi bi-twitter-x fs-4"></i>
+                        </a>
+                        <a href="#" class="text-white opacity-75" style="transition: opacity 0.3s;">
+                            <i class="bi bi-instagram fs-4"></i>
+                        </a>
+                        <a href="#" class="text-white opacity-75" style="transition: opacity 0.3s;">
+                            <i class="bi bi-linkedin fs-4"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="col-md-6 text-md-end mb-3">
-                    <p class="text-muted mb-0">© 2025 ShuleGram. All rights reserved.</p>
-                    <p class="text-muted small">Last updated: November 11, 2025</p>
+                
+                <div class="col-6 col-md-3 col-lg-2">
+                    <h5 class="h6 fw-bold mb-4">Product</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="/#features" class="text-muted text-decoration-none">Features</a></li>
+                        <li class="mb-2"><a href="/#for-parents" class="text-muted text-decoration-none">For Parent/Guardian</a></li>
+                        <li class="mb-2"><a href="/#for-teachers" class="text-muted text-decoration-none">For Teachers</a></li>
+                        <li class="mb-2"><a href="/#study-booster" class="text-muted text-decoration-none">Study Booster</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-6 col-md-3 col-lg-2">
+                    <h5 class="h6 fw-bold mb-4">Company</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">About Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Careers</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Blog</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-6 col-md-3 col-lg-2">
+                    <h5 class="h6 fw-bold mb-4">Support</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Help Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">FAQs</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Tutorials</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-6 col-md-3 col-lg-2">
+                    <h5 class="h6 fw-bold mb-4">Legal</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="/privacy-policy" class="text-muted text-decoration-none">Privacy Policy</a></li>
+                        <li class="mb-2"><a href="/terms-and-conditions" class="text-muted text-decoration-none">Terms of Service</a></li>
+                        <li class="mb-2"><a href="/child-protection-policy" class="text-muted text-decoration-none">Child Protection</a></li>
+                        <li class="mb-2"><a href="/data-protection" class="text-muted text-decoration-none">Data Protection</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <p class="mb-0 text-muted">&copy; 2025 ShuleGram. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0 text-muted small">Last updated: November 11, 2025</p>
                 </div>
             </div>
         </div>
@@ -669,17 +913,38 @@
 
     <!-- Scroll to Top Button -->
     <div class="scroll-top" id="scrollTop">
-        <i class="fas fa-arrow-up text-white"></i>
+        <i class="bi bi-arrow-up text-white"></i>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('mainNav');
+            
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
         // Smooth scrolling for TOC links
         document.querySelectorAll('.toc-item').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                const offset = 80;
+                
+                // Close offcanvas if open
+                const offcanvasElement = document.getElementById('navbarOffcanvas');
+                const offcanvasInstance = bootstrap.Offcanvas.getInstance(offcanvasElement);
+                if (offcanvasInstance) {
+                    offcanvasInstance.hide();
+                }
+                
+                const offset = 100;
                 const targetPosition = target.offsetTop - offset;
                 window.scrollTo({
                     top: targetPosition,
@@ -705,6 +970,16 @@
             });
         });
 
+        // Navbar scroll effect - gradient to white
+        const navbar = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
         // Highlight active TOC item on scroll
         const sections = document.querySelectorAll('.section-card');
         const tocItems = document.querySelectorAll('.toc-item');
@@ -714,17 +989,47 @@
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
-                if (pageYOffset >= (sectionTop - 100)) {
+                if (pageYOffset >= (sectionTop - 150)) {
                     current = section.getAttribute('id');
                 }
             });
 
             tocItems.forEach(item => {
-                item.style.background = '';
-                item.style.color = '';
+                item.classList.remove('active');
                 if (item.getAttribute('href') === `#${current}`) {
-                    item.style.background = 'rgba(155, 127, 214, 0.15)';
-                    item.style.color = '#2c3e50';
+                    item.classList.add('active');
+                }
+            });
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#' || targetId === '#!') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    
+                    // Close offcanvas if open
+                    const offcanvasElement = document.getElementById('navbarOffcanvas');
+                    const offcanvasInstance = bootstrap.Offcanvas.getInstance(offcanvasElement);
+                    if (offcanvasInstance) {
+                        offcanvasInstance.hide();
+                    }
+                    
+                    // Scroll to target
+                    setTimeout(() => {
+                        const headerOffset = 100;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }, 300);
                 }
             });
         });

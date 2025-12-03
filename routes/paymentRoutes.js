@@ -4,15 +4,27 @@ const {
   initializePayment,
   verifyPayment,
   processMpesaPayment,
+  processMpesaPaymentDirect,
   handleWebhook,
-  releaseEscrow
+  releaseEscrow,
+  getPaymentStatus,
+  retryMpesaPayment,
+  cancelPayment,
+  getTransactionHistory,
+  validateMpesaNumber
 } = require('../controllers/paymentController');
 
 // Payment routes
 router.post('/initialize', initializePayment);
 router.get('/verify/:reference', verifyPayment);
 router.post('/mpesa', processMpesaPayment);
+router.post('/mpesa/direct', processMpesaPaymentDirect);
 router.post('/webhook', handleWebhook);
 router.post('/release-escrow', releaseEscrow);
+router.get('/status/:reference', getPaymentStatus);
+router.post('/retry/:reference', retryMpesaPayment);
+router.post('/cancel/:reference', cancelPayment);
+router.get('/history/:userId', getTransactionHistory);
+router.post('/validate-phone', validateMpesaNumber);
 
 module.exports = router;

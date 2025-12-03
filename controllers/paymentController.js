@@ -116,14 +116,14 @@ const verifyPayment = async (req, res) => {
         const paymentType = paymentData.metadata.payment_type || 'booking';
 
         if (paymentType === 'booking_fee') {
-          await db.ref(`bookings/${bookingId}`).update({
+          await db.ref(`tuition-bookings/${bookingId}`).update({
             bookingFeePaid: true,
             bookingFeeReference: reference,
             bookingFeePaidAt: Date.now(),
             status: 'negotiating'
           });
         } else if (paymentType === 'escrow') {
-          await db.ref(`bookings/${bookingId}`).update({
+          await db.ref(`tuition-bookings/${bookingId}`).update({
             escrowPaid: true,
             escrowAmount: paymentData.amount / 100,
             escrowReference: reference,
@@ -687,7 +687,7 @@ const releaseEscrow = async (req, res) => {
     const db = getDatabase();
     
     // Verify booking is completed by both parties
-    const bookingSnapshot = await db.ref(`bookings/${bookingId}`).once('value');
+    const bookingSnapshot = await db.ref(`tuition-bookings/${bookingId}`).once('value');
     const booking = bookingSnapshot.val();
 
     if (!booking) {
@@ -713,7 +713,7 @@ const releaseEscrow = async (req, res) => {
 
     // In production, you would initiate a transfer to teacher's account here
     // For now, we'll just update the status
-    await db.ref(`bookings/${bookingId}`).update({
+    await db.ref(`tuition-bookings/${bookingId}`).update({
       escrowStatus: 'released',
       paymentStatus: 'paid',
       paidAt: Date.now(),
@@ -782,6 +782,309 @@ const getPaymentStatus = async (req, res) => {
   }
 };
 
+/**
+ * Retry failed M-Pesa payment
+ * POST /api/payments/retry/:reference
+ */
+const retryMpesaPayment = async (req, res) => {
+  try {
+    const { reference } = req.params;
+    const { phone, email } = req.body;
+
+    if (!reference) {
+      return res.status(400).json({
+        success: false,
+        message: 'Payment reference is required'
+      });
+    }
+
+    const db = getDatabase();
+    const transactionRef = db.ref(`payment-transactions/${reference}`);
+    const snapshot = await transactionRef.once('value');
+    
+    if (!snapshot.exists()) {
+      return res.status(404).json({
+        success: false,
+        message: 'Transaction not found'
+      });
+    }
+
+    const transaction = snapshot.val();
+    
+    if (transaction.status !== 'failed') {
+      return res.status(400).json({
+        success: false,
+        message: 'Only failed transactions can be retried'
+      });
+    }
+
+    // Use provided phone/email or fallback to original
+    const retryPhone = phone || transaction.phone;
+    const retryEmail = email || transaction.email;
+
+    // Create new retry reference
+    const retryReference = `retry_${uuidv4()}`;
+    
+    // Update original transaction
+    await transactionRef.update({
+      status: 'retrying',
+      retryReference,
+      retryCount: (transaction.retryCount || 0) + 1,
+      lastRetryAt: Date.now()
+    });
+
+    // Process retry using the direct M-Pesa method
+    const retryData = {
+      phone: retryPhone,
+      email: retryEmail,
+      amount: transaction.amount,
+      bookingId: transaction.bookingId,
+      metadata: {
+        ...transaction.metadata,
+        original_reference: reference,
+        is_retry: true
+      }
+    };
+
+    // Call the direct payment method with new reference
+    const retryResult = await processMpesaPaymentDirect({
+      body: retryData
+    }, res);
+
+    return res.status(200).json({
+      success: true,
+      message: 'Payment retry initiated',
+      data: {
+        originalReference: reference,
+        newReference: retryReference,
+        retryCount: (transaction.retryCount || 0) + 1
+      }
+    });
+
+  } catch (error) {
+    console.error('Retry payment error:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Failed to retry payment',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Cancel pending payment
+ * POST /api/payments/cancel/:reference
+ */
+const cancelPayment = async (req, res) => {
+  try {
+    const { reference } = req.params;
+    const { reason } = req.body;
+
+    if (!reference) {
+      return res.status(400).json({
+        success: false,
+        message: 'Payment reference is required'
+      });
+    }
+
+    const db = getDatabase();
+    const transactionRef = db.ref(`payment-transactions/${reference}`);
+    const snapshot = await transactionRef.once('value');
+    
+    if (!snapshot.exists()) {
+      return res.status(404).json({
+        success: false,
+        message: 'Transaction not found'
+      });
+    }
+
+    const transaction = snapshot.val();
+    
+    if (transaction.status === 'success') {
+      return res.status(400).json({
+        success: false,
+        message: 'Cannot cancel completed payment'
+      });
+    }
+
+    if (transaction.status === 'cancelled') {
+      return res.status(400).json({
+        success: false,
+        message: 'Payment already cancelled'
+      });
+    }
+
+    // Update transaction status
+    await transactionRef.update({
+      status: 'cancelled',
+      cancelledAt: Date.now(),
+      cancelReason: reason || 'User requested cancellation'
+    });
+
+    // Update booking if applicable
+    if (transaction.bookingId) {
+      const bookingRef = db.ref(`bookings/${transaction.bookingId}`);
+      await bookingRef.update({
+        lastUpdated: new Date().toISOString(),
+        status: 'cancelled',
+        cancelReason: reason || 'Payment cancelled'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: 'Payment cancelled successfully',
+      data: {
+        reference,
+        cancelledAt: Date.now()
+      }
+    });
+
+  } catch (error) {
+    console.error('Cancel payment error:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Failed to cancel payment',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Get transaction history for a user
+ * GET /api/payments/history/:userId
+ */
+const getTransactionHistory = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { limit = 50, offset = 0, status } = req.query;
+
+    if (!userId) {
+      return res.status(400).json({
+        success: false,
+        message: 'User ID is required'
+      });
+    }
+
+    const db = getDatabase();
+    const transactionsRef = db.ref('payment-transactions')
+      .orderByChild('email')
+      .equalTo(userId)
+      .limitToFirst(parseInt(limit));
+
+    const snapshot = await transactionsRef.once('value');
+    const transactions = snapshot.val() || {};
+
+    // Filter by status if provided
+    let filteredTransactions = Object.values(transactions);
+    if (status) {
+      filteredTransactions = filteredTransactions.filter(t => t.status === status);
+    }
+
+    // Sort by creation date (newest first)
+    filteredTransactions.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+    // Apply offset
+    const paginatedTransactions = filteredTransactions.slice(parseInt(offset));
+
+    return res.status(200).json({
+      success: true,
+      data: {
+        transactions: paginatedTransactions,
+        total: filteredTransactions.length,
+        limit: parseInt(limit),
+        offset: parseInt(offset)
+      }
+    });
+
+  } catch (error) {
+    console.error('Get transaction history error:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Failed to fetch transaction history',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Validate M-Pesa phone number
+ * POST /api/payments/validate-phone
+ */
+const validateMpesaNumber = async (req, res) => {
+  try {
+    const { phone } = req.body;
+
+    if (!phone) {
+      return res.status(400).json({
+        success: false,
+        message: 'Phone number is required'
+      });
+    }
+
+    // Format phone number
+    let formattedPhone = phone.replace(/\s+/g, '');
+    
+    // Remove any non-digit characters
+    formattedPhone = formattedPhone.replace(/\D/g, '');
+    
+    // Handle different formats
+    if (formattedPhone.startsWith('0')) {
+      formattedPhone = '254' + formattedPhone.substring(1);
+    } else if (formattedPhone.startsWith('+254')) {
+      formattedPhone = formattedPhone.substring(1);
+    } else if (formattedPhone.startsWith('254')) {
+      // Already in correct format
+    } else if (formattedPhone.length === 9) {
+      // Assume Kenya number without prefix
+      formattedPhone = '254' + formattedPhone;
+    } else {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid phone number format. Please use format: 254XXXXXXXXX or 07XXXXXXXXX'
+      });
+    }
+
+    // Validate phone number format (should be 12 digits: 254XXXXXXXXX)
+    if (!/^254\d{9}$/.test(formattedPhone)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid phone number format. Should be 254XXXXXXXXX'
+      });
+    }
+
+    // Check if it's a valid Kenyan mobile prefix
+    const validPrefixes = ['2547', '2541']; // 07XX and 01XX series
+    const isValidPrefix = validPrefixes.some(prefix => formattedPhone.startsWith(prefix));
+    
+    if (!isValidPrefix) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid Kenyan mobile number prefix'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: 'Phone number is valid',
+      data: {
+        originalPhone: phone,
+        formattedPhone: formattedPhone,
+        country: 'Kenya',
+        provider: formattedPhone.startsWith('2547') ? 'Safaricom MPesa' : 'Other Kenyan Mobile'
+      }
+    });
+
+  } catch (error) {
+    console.error('Validate phone error:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Failed to validate phone number',
+      error: error.message
+    });
+  }
+};
+
 module.exports = {
   initializePayment,
   verifyPayment,
@@ -789,5 +1092,9 @@ module.exports = {
   processMpesaPaymentDirect,
   handleWebhook,
   releaseEscrow,
-  getPaymentStatus
+  getPaymentStatus,
+  retryMpesaPayment,
+  cancelPayment,
+  getTransactionHistory,
+  validateMpesaNumber
 };
