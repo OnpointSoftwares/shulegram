@@ -1,20 +1,32 @@
 const { paystackApi } = require('../config/paystack');
 const { getDatabase } = require('../config/firebase');
 const { v4: uuidv4 } = require('uuid');
+const logger = require('../utils/logger');
 
 /**
  * Initialize a payment transaction
  * POST /api/payments/initialize
  */
 const initializePayment = async (req, res) => {
+  const startTime = Date.now();
+  const { email, amount, bookingId, metadata } = req.body;
+  
   try {
-    const { email, amount, bookingId, metadata } = req.body;
+    // Log API request
+    logger.api.request(
+      'POST',
+      '/api/payments/initialize',
+      req.ip || 'unknown',
+      req.get('User-Agent') || 'unknown'
+    );
 
     // Validate input
     if (!email || !amount || !bookingId) {
+      const error = 'Missing required fields: email, amount, bookingId';
+      logger.api.error('POST', '/api/payments/initialize', error, 400);
       return res.status(400).json({
         success: false,
-        message: 'Missing required fields: email, amount, bookingId'
+        message: error
       });
     }
 
@@ -23,6 +35,9 @@ const initializePayment = async (req, res) => {
 
     // Generate unique reference using UUID
     const reference = `booking_${uuidv4().replace(/-/g, '')}`;
+
+    // Log payment initialization
+    logger.payment.init(reference, { email, amount, bookingId });
 
     // Prepare payment data
     const paymentData = {
@@ -43,15 +58,24 @@ const initializePayment = async (req, res) => {
     if (response.data.status) {
       // Log transaction to Firebase
       const db = getDatabase();
-      await db.ref(`payment-transactions/${reference}`).set({
+      const transactionData = {
         reference,
         bookingId,
         email,
         amount: amount,
         status: 'pending',
         createdAt: Date.now(),
-        metadata
-      });
+        metadata,
+        paymentMethod: 'unknown', // Will be updated when payment is completed
+        source: 'api'
+      };
+
+      logger.firebase.write('payment-transactions', reference, 'create');
+      await db.ref(`payment-transactions/${reference}`).set(transactionData);
+
+      const responseTime = Date.now() - startTime;
+      logger.performance.timing('payment_initialize', responseTime, { reference, amount });
+      logger.api.response('POST', '/api/payments/initialize', 200, responseTime);
 
       return res.status(200).json({
         success: true,
@@ -63,18 +87,35 @@ const initializePayment = async (req, res) => {
         }
       });
     } else {
+      const error = response.data.message || 'Failed to initialize payment';
+      logger.payment.failed(reference, error, { amount, bookingId });
+      const responseTime = Date.now() - startTime;
+      logger.api.error('POST', '/api/payments/initialize', error, 400);
+      
       return res.status(400).json({
         success: false,
         message: 'Failed to initialize payment',
-        error: response.data.message
+        error: error
       });
     }
   } catch (error) {
-    console.error('Payment initialization error:', error.response?.data || error.message);
+    const responseTime = Date.now() - startTime;
+    const errorMessage = error.response?.data?.message || error.message;
+    
+    logger.error(error, { 
+      operation: 'initializePayment', 
+      email, 
+      amount, 
+      bookingId,
+      responseTime 
+    });
+    
+    logger.api.error('POST', '/api/payments/initialize', errorMessage, 500);
+    
     return res.status(500).json({
       success: false,
       message: 'Internal server error',
-      error: error.response?.data?.message || error.message
+      error: errorMessage
     });
   }
 };
@@ -493,7 +534,7 @@ const processMpesaPaymentDirect = async (req, res) => {
 const verifyWebhookSignature = (req) => {
   try {
     if (!process.env.PAYSTACK_WEBHOOK_SECRET) {
-      console.error('PAYSTACK_WEBHOOK_SECRET is not set');
+      logger.webhook.signatureError('PAYSTACK_WEBHOOK_SECRET is not set');
       return false;
     }
 
@@ -501,7 +542,7 @@ const verifyWebhookSignature = (req) => {
     const signature = req.headers['x-paystack-signature'];
     
     if (!signature) {
-      console.error('No signature found in request headers');
+      logger.webhook.signatureError('No signature found in request headers');
       return false;
     }
 
@@ -510,12 +551,18 @@ const verifyWebhookSignature = (req) => {
       .update(JSON.stringify(req.body))
       .digest('hex');
 
-    return crypto.timingSafeEqual(
+    const isValid = crypto.timingSafeEqual(
       Buffer.from(hash),
       Buffer.from(signature)
     );
+
+    if (!isValid) {
+      logger.webhook.signatureError('Signature verification failed - hash mismatch');
+    }
+
+    return isValid;
   } catch (error) {
-    console.error('Error verifying webhook signature:', error);
+    logger.webhook.signatureError(`Error verifying webhook signature: ${error.message}`);
     return false;
   }
 };
@@ -525,20 +572,27 @@ const verifyWebhookSignature = (req) => {
  * POST /api/payments/webhook
  */
 const handleWebhook = async (req, res) => {
-  // Log incoming webhook for debugging
-  console.log('=== Incoming Webhook ===');
-  console.log('Headers:', JSON.stringify(req.headers, null, 2));
-  console.log('Body:', JSON.stringify(req.body, null, 2));
+  const startTime = Date.now();
+  const { event, data } = req.body;
+  const reference = data?.reference || 'unknown';
+
+  // Log incoming webhook
+  logger.webhook.incoming(event, reference);
+  logger.debug(`=== Incoming Webhook ===`);
+  logger.debug(`Headers: ${JSON.stringify(req.headers, null, 2)}`);
+  logger.debug(`Body: ${JSON.stringify(req.body, null, 2)}`);
 
   try {
     // Verify webhook signature
     if (!verifyWebhookSignature(req)) {
-      console.error('Webhook signature verification failed');
+      logger.webhook.failed(event, 'Invalid webhook signature');
       return res.status(401).json({ 
         success: false, 
         message: 'Invalid webhook signature' 
       });
     }
+
+    logger.webhook.verified(event, reference);
 
     console.log('✅ Webhook signature verified');
 
