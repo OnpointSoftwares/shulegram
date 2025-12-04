@@ -9,6 +9,7 @@ const { initializeFirebase } = require('./config/firebase');
 const paymentRoutes = require('./routes/paymentRoutes');
 const frontendRoutes = require('./routes/frontendRoutes');
 const { authenticateApiKey } = require('./middleware/auth');
+const apiLogger = require('./middleware/apiLogger');
 const path = require('path');
 
 // Initialize Express app
@@ -65,8 +66,9 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json()); // Parse JSON bodies
+app.use(apiLogger); // Comprehensive API logging
 app.use(morgan('dev'));
-// Enhanced request logging
+// Enhanced request logging (for debugging)
 app.use((req, res, next) => {
   console.log('\n=== Incoming Request ===');
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
